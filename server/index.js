@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import { getData, getURI } from "./services/songFetch.js";
 import { getAccessToken } from "./services/spotifyAuth.js";
 import { connectDB } from "./config/db.js";
+import { getLatestSong } from "./controllers/song.controller.js";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ async function main() {
 
   await getData(uri, token, day);
   console.log("Song added successfully.");
+  getLatestSong();
 }
 
 main();
