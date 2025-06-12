@@ -1,4 +1,30 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
+
+const reply = new mongoose.Schema({
+  message: {
+    type: String,
+    required: true,
+  },
+  likes: {
+    type: Number,
+    required: true,
+  },
+});
+
+const comment = new mongoose.Schema({
+  message: {
+    type: String,
+    required: true,
+  },
+  likes: {
+    type: Number,
+    required: true,
+  },
+  replies: {
+    type: [reply],
+    required: true,
+  },
+});
 
 const songSchema = new mongoose.Schema({
   name: {
@@ -11,6 +37,10 @@ const songSchema = new mongoose.Schema({
   },
   trackId: {
     type: String,
+    required: true,
+  },
+  comments: {
+    type: [comment],
     required: true,
   },
 });
