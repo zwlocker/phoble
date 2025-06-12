@@ -26,24 +26,27 @@ const comment = new mongoose.Schema({
   },
 });
 
-const songSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const songSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    artist: {
+      type: String,
+      required: true,
+    },
+    trackId: {
+      type: String,
+      required: true,
+    },
+    comments: {
+      type: [comment],
+      required: true,
+    },
   },
-  artist: {
-    type: String,
-    required: true,
-  },
-  trackId: {
-    type: String,
-    required: true,
-  },
-  comments: {
-    type: [comment],
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 const Song = mongoose.model("Song", songSchema);
 export default Song;
