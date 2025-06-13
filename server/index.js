@@ -7,9 +7,8 @@ dotenv.config();
 
 async function main() {
   connectDB();
-
   const app = express();
-  app.use("/songs", songRouter);
+  app.use("/api/songs", songRouter);
   app.listen(5100);
 }
 
