@@ -19,6 +19,7 @@ export async function getData(queryString, token, dayCounter) {
     // Iterates through all 50 tracks in the query
     for (let track of json.tracks.items) {
       const { name, artists, popularity, id } = track;
+      const image = track.album.images[0].url;
       const artist = artists[0].name;
 
       let save = false;
@@ -58,6 +59,8 @@ export async function getData(queryString, token, dayCounter) {
           name: name,
           artist: artist,
           trackId: id,
+          comments: [],
+          cover: image,
         });
         saveSong(song);
         return;
@@ -87,16 +90,16 @@ export async function getURI(dayCounter) {
   let spotifyURI = "https://api.spotify.com/v1/search?";
   let queryString = "genre%3A" + genres[Math.floor(Math.random() * 3)];
 
-  if (dayCounter >= 0 && dayCounter < 3) {
+  if (dayCounter >= 1 && dayCounter < 4) {
     // Day is Monday, Tuesday, or Wednesday
     // Most popular search
     queryString = "q=" + queryString;
-  } else if (dayCounter === 3 || dayCounter === 4) {
+  } else if (dayCounter === 4 || dayCounter === 5) {
     // Day is Thursday or Friday
     // More niche search
     queryString =
       "q=" + letters[Math.floor(Math.random() * 5)] + "%20" + queryString;
-  } else if (dayCounter === 5 || dayCounter === 6) {
+  } else if (dayCounter === 6 || dayCounter === 0) {
     // Day is Saturday or Sunday
     // Least popular search
     queryString = "q=tag:hipster%20" + queryString;
@@ -111,6 +114,7 @@ export async function getURI(dayCounter) {
 async function saveSong(song) {
   try {
     await song.save();
+    console.log("Song added successfully.");
   } catch (error) {
     console.log("Error in saving song to DB: ", error.message);
   }

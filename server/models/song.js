@@ -44,6 +44,10 @@ const songSchema = new mongoose.Schema(
       type: [comment],
       required: true,
     },
+    cover: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
