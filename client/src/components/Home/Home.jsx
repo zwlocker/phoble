@@ -1,12 +1,12 @@
 import React from "react";
 import { getLatestSong } from "../../actions/songs";
-import { useDispatch } from "react-redux";
 
+let song = await getLatestSong();
 const Home = () => {
   return (
     <div className="container mx-auto px-4">
-      <h1 className="text-2xl font-bold">Hello Landon</h1>
-      <p className="mt-4">AHHHH</p>
+      <h1 className="text-2xl font-bold">Daily Song</h1>
+      <img src={song.cover} />
     </div>
   );
 };

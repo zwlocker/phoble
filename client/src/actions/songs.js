@@ -1,9 +1,9 @@
 import { getLatest } from "../api";
 
-export const getLatestSong = () => async (dispatch) => {
+export const getLatestSong = async () => {
   try {
-    const { data } = await getLatest();
-    console.log(data);
-    dispatch({ type: "FETCH_LATEST", payload: data });
-  } catch (error) {}
+    return await getLatest();
+  } catch (error) {
+    console.log(error);
+  }
 };
