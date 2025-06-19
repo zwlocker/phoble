@@ -4,9 +4,9 @@ import { Provider } from "react-redux";
 
 const App = () => {
   return (
-    <Provider>
+    <div>
       <Home />
-    </Provider>
+    </div>
   );
 };
 
