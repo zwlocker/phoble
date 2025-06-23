@@ -7,6 +7,10 @@ const Home = () => {
     <div className="container mx-auto px-4">
       <h1 className="text-2xl font-bold">Daily Song</h1>
       <img src={song.cover} />
+      <p>{song.name}</p>
+      <p>{song.artist}</p>
+      <h2>Comments</h2>
+      <p></p>
     </div>
   );
 };

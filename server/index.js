@@ -11,7 +11,7 @@ async function main() {
   connectDB();
   const app = express();
   app.use(cors());
-  addSong();
+  await addSong();
   app.use("/api/songs", songRouter);
   app.listen(5100);
 }
