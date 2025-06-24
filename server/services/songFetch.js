@@ -52,8 +52,6 @@ export async function getData(queryString, token, dayCounter) {
         if (popularity >= 0 && popularity < 30) {
           save = true;
         }
-      } else {
-        console.log("error, popularity too low!");
       }
 
       if (save && !exists) {
