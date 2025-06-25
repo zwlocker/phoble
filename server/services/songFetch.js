@@ -108,6 +108,7 @@ export async function getURI(dayCounter) {
 
   queryString =
     spotifyURI + queryString + "&type=track&market=US&limit=50&offset=0";
+
   return queryString;
 }
 
