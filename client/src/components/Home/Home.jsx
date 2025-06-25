@@ -4,8 +4,10 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import Player from "../Player/Player";
 
 let song = await getLatestSong();
+
 const Home = () => {
   return (
     <Container maxWidth="lg" className="text-white">
@@ -20,10 +22,9 @@ const Home = () => {
         </Box>
         <Box>
           <Typography variant="h3">Comments</Typography>
-          <Typography variant="h6">This song is really neat.</Typography>
-          <Typography variant="h6">So good!</Typography>
-          <Typography variant="h6">Thank you Phoble!</Typography>
+
           <TextField placeholder="Enter comment"></TextField>
+          <Player id={song.trackId} />
         </Box>
       </Box>
     </Container>
