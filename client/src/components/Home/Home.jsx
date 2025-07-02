@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Player from "../Player/Player";
 import Button from "@mui/material/Button";
+import Comment from "./Comment/Comment";
+import CommentSection from "./CommentSection/CommentSection";
 
 const Home = () => {
   const [message, setMessage] = useState("");
@@ -43,11 +45,7 @@ const Home = () => {
         </Box>
         <Box>
           <Typography variant="h3">Comments</Typography>
-          <Box>
-            {comments.map((comment) => (
-              <Typography key={comment._id}>{comment.message}</Typography>
-            ))}
-          </Box>
+          <CommentSection comments={comments} />
           <form onSubmit={handleSubmit}>
             <TextField
               value={message}
