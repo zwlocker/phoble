@@ -9,9 +9,13 @@ dotenv.config();
 
 async function main() {
   connectDB();
+
   const app = express();
   app.use(cors());
-  await addSong();
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
+  // await addSong();
   app.use("/api/songs", songRouter);
   app.listen(5100);
 }

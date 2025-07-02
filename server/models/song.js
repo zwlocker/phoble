@@ -1,16 +1,5 @@
 import mongoose, { mongo } from "mongoose";
 
-const reply = new mongoose.Schema({
-  message: {
-    type: String,
-    required: true,
-  },
-  likes: {
-    type: Number,
-    required: true,
-  },
-});
-
 const comment = new mongoose.Schema({
   message: {
     type: String,
@@ -18,10 +7,6 @@ const comment = new mongoose.Schema({
   },
   likes: {
     type: Number,
-    required: true,
-  },
-  replies: {
-    type: [reply],
     required: true,
   },
 });

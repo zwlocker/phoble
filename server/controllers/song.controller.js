@@ -9,9 +9,18 @@ export const getLatestSong = async (req, res) => {
   }
 };
 
-export const updateComments = async (req, res) => {
+export const addComment = async (req, res) => {
   try {
-    console.log("Updating comments");
+    const comment = {
+      message: req.body.message,
+      likes: 0,
+    };
+
+    const latestSong = await Song.findOne().sort({ createdAt: -1 });
+    latestSong.comments.push(comment);
+    await latestSong.save();
+
+    res.status(201).json(latestSong.comments.at(-1));
   } catch (error) {
     console.log(error);
   }

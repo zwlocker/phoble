@@ -6,5 +6,7 @@ export const getLatest = () => {
   return axios.get(`${url}/latest`).then((response) => response.data);
 };
 
-export const updateComments = (id, updatedComments) =>
-  axios.patch(`${url}/${id}`, updatedComments);
+export const addComment = async (message) => {
+  const res = await axios.post(`${url}/latest/comments`, { message });
+  return res.data;
+};
