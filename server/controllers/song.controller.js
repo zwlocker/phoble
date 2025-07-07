@@ -25,3 +25,18 @@ export const addComment = async (req, res) => {
     console.log(error);
   }
 };
+
+export const deleteComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const latestSong = await Song.findOne().sort({ createdAt: -1 });
+    await Song.findByIdAndUpdate(
+      latestSong._id,
+      { $pull: { comments: { _id: id } } },
+      { new: true }
+    );
+    res.status(201).json(latestSong.comments.at(-1));
+  } catch (error) {
+    console.log(error);
+  }
+};

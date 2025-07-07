@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Player from "../Player/Player";
 import Button from "@mui/material/Button";
-import Comment from "./Comment/Comment";
 import CommentSection from "./CommentSection/CommentSection";
 
 const Home = () => {
@@ -30,23 +29,43 @@ const Home = () => {
     setMessage("");
   };
 
+  const handleDeleteComment = (commentId) => {
+    setComments((prev) => prev.filter((comment) => comment._id !== commentId));
+  };
+
   if (!song) return <Typography>Loading...</Typography>;
 
   return (
     <Container maxWidth="lg" className="text-white">
       <Typography variant="h1">Phoble</Typography>
       <Box sx={{ display: "flex", gap: 4 }}>
-        <Box>
+        <Box sx={{ maxWidth: 640 }}>
           <Box component="img" src={song.cover} />
-          <Box sx={{ flex: 1 }}>
-            <Typography variant="h2">{song.name}</Typography>
-            <Typography variant="h5">{song.artist}</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: 1,
+            }}
+          >
+            <Box>
+              <Typography variant="h2">{song.name}</Typography>
+              <Typography variant="h5">{song.artist}</Typography>
+            </Box>
+
+            <Player id={song.trackId} sx={{ marginTop: 4 }} />
           </Box>
         </Box>
+
         <Box>
-          <Typography variant="h3">Comments</Typography>
-          <CommentSection comments={comments} />
-          <form onSubmit={handleSubmit}>
+          <Typography variant="h3" sx={{ marginBottom: 1 }}>
+            Comments
+          </Typography>
+          <CommentSection
+            comments={comments}
+            onDeleteComment={handleDeleteComment}
+          />
+          <form onSubmit={handleSubmit} className="mt-3">
             <TextField
               value={message}
               placeholder="Enter comment"
@@ -55,7 +74,6 @@ const Home = () => {
             />
             <Button type="submit">Submit</Button>
           </form>
-          <Player id={song.trackId} />
         </Box>
       </Box>
     </Container>
