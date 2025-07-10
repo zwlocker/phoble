@@ -15,3 +15,7 @@ export const deleteComment = async (CommentId) => {
   const res = await axios.delete(`${url}/latest/comments/${CommentId}`);
   return res.data;
 };
+
+export const getSongs = () => {
+  return axios.get(`${url}/songs`).then((response) => response.data);
+};

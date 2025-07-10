@@ -53,6 +53,9 @@ export async function getData(queryString, token, dayCounter) {
           save = true;
         }
       }
+      //BIG FAT COMMENT ADDED THIS SO WE CAN OVERRIDE POPULARITY ISSUES TO TEST GRID
+      save = true;
+      console.log(track);
 
       if (save && !exists) {
         const song = new Song({

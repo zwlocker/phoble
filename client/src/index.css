@@ -1,9 +1,8 @@
 @import "tailwindcss";
 
-html {
-  height: 100%;
-}
-
 body {
-  background: linear-gradient(315deg, rgb(56, 17, 123), rgb(50, 154, 157));
+  background: linear-gradient(to bottom right, #4c1d95, #1e3a8a, #312e81);
+  color: white;
+  min-height: 100vh;
+  font-family: "Gill Sans";
 }

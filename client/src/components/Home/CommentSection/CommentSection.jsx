@@ -1,25 +1,77 @@
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import React from "react";
+import Button from "@mui/material/Button";
 import Comment from "../Comment/Comment";
+import { getLatest, addComment, deleteComment } from "../../../api";
+import CommentIcon from "@mui/icons-material/Comment";
+import SendIcon from "@mui/icons-material/Send";
 
-const CommentSection = ({ comments, onDeleteComment }) => {
+const CommentSection = ({ songId }) => {
+  const [message, setMessage] = useState("");
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      const data = await getLatest(); // Replace with getComments(songId) if available
+      setComments(data.comments || []);
+    };
+    fetchComments();
+  }, [songId]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await addComment(message);
+    setComments((prev) => [...prev, res]);
+    setMessage("");
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    await deleteComment(commentId);
+    setComments((prev) => prev.filter((c) => c._id !== commentId));
+  };
+
   return (
-    <Box
-      sx={{
-        backgroundColor: "#132d52",
-        padding: 2,
-        borderRadius: 4,
-        border: "2px solid rgb(50, 154, 157)",
-      }}
-    >
-      {comments.map((comment) => (
-        <Comment
-          key={comment._id}
-          comment={comment}
-          onDelete={onDeleteComment}
-        />
-      ))}
-    </Box>
+    <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10">
+      <div className="flex items-center gap-2 mb-6">
+        <CommentIcon className="w-6 h-6 text-blue-400" />
+
+        <h3 className="text-2xl font-bold">Comments</h3>
+      </div>
+      <div className="mb-6">
+        <div className="flex gap-3">
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            className="w-full"
+            sx={{ display: "flex", gap: 2, my: 2 }}
+          >
+            <input
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Add a comment..."
+              className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-200 shadow-lg disabled:opacity-50"
+            >
+              <SendIcon />
+            </Button>
+          </Box>
+        </div>
+      </div>
+      <div className="space-y-4 max-h-96 overflow-y-auto">
+        {comments.map((comment) => (
+          <Comment
+            key={comment._id}
+            comment={comment}
+            onDelete={handleDeleteComment}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 

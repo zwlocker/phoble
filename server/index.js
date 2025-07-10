@@ -15,7 +15,7 @@ async function main() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // await addSong();
+  await addSong();
   app.use("/api/songs", songRouter);
   app.listen(5100);
 }
