@@ -2,20 +2,27 @@ import axios from "axios";
 
 const url = "http://localhost:5100/api/songs";
 
-export const getLatest = () => {
-  return axios.get(`${url}/latest`).then((response) => response.data);
+export const getSong = async (songId = "latest") => {
+  return axios.get(`${url}/${songId}`).then((response) => response.data);
 };
 
-export const addComment = async (message) => {
-  const res = await axios.post(`${url}/latest/comments`, { message });
+export const addComment = async (message, songId = "latest") => {
+  const res = await axios.post(`${url}/${songId}/comments`, { message });
   return res.data;
 };
 
-export const deleteComment = async (CommentId) => {
-  const res = await axios.delete(`${url}/latest/comments/${CommentId}`);
+export const deleteComment = async (commentId, songId = "latest") => {
+  const res = await axios.delete(`${url}/${songId}/comments/${commentId}`);
   return res.data;
 };
 
 export const getSongs = () => {
-  return axios.get(`${url}/songs`).then((response) => response.data);
+  return axios.get(`${url}`).then((response) => response.data);
+};
+
+export const toggleLike = async (commentId, songId = "latest", increment) => {
+  const res = await axios.post(
+    `${url}/${songId}/comments/${commentId}/${increment}`
+  );
+  return res.data;
 };

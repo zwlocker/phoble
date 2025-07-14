@@ -1,14 +1,5 @@
 import Song from "../models/song.js";
 
-export const getLatestSong = async (req, res) => {
-  try {
-    const latestSong = await Song.findOne().sort({ createdAt: -1 });
-    res.send(latestSong);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const addComment = async (req, res) => {
   try {
     const comment = {
@@ -16,11 +7,19 @@ export const addComment = async (req, res) => {
       likes: 0,
     };
 
-    const latestSong = await Song.findOne().sort({ createdAt: -1 });
-    latestSong.comments.push(comment);
-    await latestSong.save();
+    const id = req.params.id;
+    console.log(id);
+    let song;
+    if (id === "latest") {
+      song = await Song.findOne().sort({ createdAt: -1 });
+    } else {
+      song = await Song.findOne({ trackId: id });
+    }
 
-    res.status(201).json(latestSong.comments.at(-1));
+    song.comments.push(comment);
+    await song.save();
+
+    res.status(201).json(song.comments.at(-1));
   } catch (error) {
     console.log(error);
   }
@@ -28,14 +27,20 @@ export const addComment = async (req, res) => {
 
 export const deleteComment = async (req, res) => {
   try {
-    const { id } = req.params;
-    const latestSong = await Song.findOne().sort({ createdAt: -1 });
+    const id = req.params.id || "latest";
+    let song;
+
+    if (id === "latest") {
+      song = await Song.findOne().sort({ createdAt: -1 });
+    } else {
+      song = await Song.findOne({ trackId: id });
+    }
     await Song.findByIdAndUpdate(
-      latestSong._id,
-      { $pull: { comments: { _id: id } } },
+      song._id,
+      { $pull: { comments: { _id: req.params.commentId } } }, //
       { new: true }
     );
-    res.status(201).json(latestSong.comments.at(-1));
+    res.status(201).json(song.comments.at(-1));
   } catch (error) {
     console.log(error);
   }
@@ -46,6 +51,47 @@ export const getSongs = async (req, res) => {
     const allSongs = await Song.find();
     console.log(allSongs);
     res.send(allSongs);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSong = async (req, res) => {
+  try {
+    const id = req.params.id || "latest";
+    let song;
+
+    if (id === "latest") {
+      song = await Song.findOne().sort({ createdAt: -1 });
+    } else {
+      song = await Song.findOne({ trackId: id });
+    }
+    res.status(200).json(song);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const toggleLike = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const commentId = req.params.commentId;
+    const increment = req.params.increment;
+    let song;
+
+    if (id === "latest") {
+      song = await Song.findOne().sort({ createdAt: -1 });
+    } else {
+      song = await Song.findOne({ trackId: id });
+    }
+
+    await Song.findOneAndUpdate(
+      { _id: song._id, "comments._id": commentId },
+      { $inc: { "comments.$.likes": increment } },
+      { new: true }
+    );
+
+    res.status(200).json(song);
   } catch (error) {
     console.log(error);
   }

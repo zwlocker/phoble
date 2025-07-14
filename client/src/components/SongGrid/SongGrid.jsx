@@ -1,9 +1,10 @@
 import Container from "@mui/material/Container";
 import React, { useEffect, useState } from "react";
-import Navbuttons from "../Home/Navbuttons/Navbuttons";
+import Navbuttons from "../SongPage/Navbuttons/Navbuttons";
 import Grid from "@mui/material/Grid";
 import { getSongs } from "../../api";
 import Box from "@mui/material/Box";
+import { useNavigate } from "react-router-dom";
 
 const SongGrid = () => {
   const [songs, setSongs] = useState([]);
@@ -16,15 +17,19 @@ const SongGrid = () => {
     fetchSongs();
   }, []);
 
+  const navigate = useNavigate();
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Navbuttons />
       <Grid container spacing={5} sx={{ textAlign: "center" }}>
-        {songs.map((song) => (
+        {songs.toReversed().map((song, index) => (
           <Grid
             size={4}
             key={song._id}
-            className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10 max-h-101"
+            className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10 max-h-101 cursor-pointer"
+            onClick={() =>
+              index === 0 ? navigate("/") : navigate(`/song/${song.trackId}`)
+            }
           >
             <Box
               sx={{
