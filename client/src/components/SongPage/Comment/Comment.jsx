@@ -4,8 +4,11 @@ import { toggleLike } from "../../../api";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const Comment = ({ comment, onDelete, songId }) => {
+  const { user, isAuthenticated, login, logout, loading } = useAuth();
+
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(comment.likes);
   const handleDeleteComment = async () => {
@@ -20,7 +23,7 @@ const Comment = ({ comment, onDelete, songId }) => {
     setIsLiked(newIsLiked);
     setLikes(likes + increment);
 
-    await toggleLike(comment._id, songId, increment);
+    await toggleLike(comment._id, songId, increment, user);
   };
 
   return (
@@ -32,7 +35,7 @@ const Comment = ({ comment, onDelete, songId }) => {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
             <span className="font-semibold text-sm text-purple-300">
-              EDM Fan
+              {comment.displayName}
             </span>
             <span className="text-xs text-gray-400">1 hour ago</span>
           </div>

@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const comment = new mongoose.Schema({
   message: {
@@ -7,6 +7,12 @@ const comment = new mongoose.Schema({
   },
   likes: {
     type: Number,
+    required: true,
+  },
+  likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  displayName: {
+    type: String,
     required: true,
   },
 });
@@ -37,5 +43,4 @@ const songSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Song = mongoose.model("Song", songSchema);
-export default Song;
+export default mongoose.model("Song", songSchema);

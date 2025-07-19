@@ -3,6 +3,7 @@ import HistoryIcon from "@mui/icons-material/History";
 import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
+import AuthButton from "./AuthButton/AuthButton";
 
 const Navbuttons = () => {
   const navigate = useNavigate();
@@ -23,10 +24,7 @@ const Navbuttons = () => {
           <HistoryIcon className="w-5 h-5" />
           <span>Past Songs</span>
         </button>
-        <button className="flex items-center space-x-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-xl hover:bg-white/20 hover:border-white/30 transition-all duration-200 font-medium cursor-pointer">
-          <PersonIcon className="w-5 h-5" />
-          <span>Profile</span>
-        </button>
+        <AuthButton />
       </div>
     </Box>
   );

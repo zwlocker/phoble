@@ -5,14 +5,18 @@ import Comment from "../Comment/Comment";
 import { getSong, addComment, deleteComment } from "../../../api";
 import CommentIcon from "@mui/icons-material/Comment";
 import SendIcon from "@mui/icons-material/Send";
+import { useAuth } from "../../../contexts/AuthContext";
+import AuthButton from "../Navbuttons/AuthButton/AuthButton";
 
 const CommentSection = ({ songId }) => {
+  const { user, isAuthenticated, login, logout, loading } = useAuth();
+
   const [message, setMessage] = useState("");
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const fetchComments = async () => {
-      const data = await getSong(songId); // Replace with getComments(songId) if available
+      const data = await getSong(songId);
       setComments(data.comments || []);
     };
     fetchComments();
@@ -20,7 +24,7 @@ const CommentSection = ({ songId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await addComment(message, songId);
+    const res = await addComment(message, songId, user._id);
     setComments((prev) => [...prev, res]);
     setMessage("");
   };
@@ -53,13 +57,17 @@ const CommentSection = ({ songId }) => {
               placeholder="Add a comment..."
               className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             />
-            <Button
-              type="submit"
-              variant="contained"
-              className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-200 shadow-lg disabled:opacity-50"
-            >
-              <SendIcon />
-            </Button>
+            {isAuthenticated ? (
+              <Button
+                type="submit"
+                variant="contained"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-200 shadow-lg disabled:opacity-50"
+              >
+                <SendIcon />
+              </Button>
+            ) : (
+              <AuthButton />
+            )}
           </Box>
         </div>
       </div>

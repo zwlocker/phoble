@@ -1,14 +1,18 @@
 import Song from "../models/song.js";
+import User from "../models/user.js";
 
 export const addComment = async (req, res) => {
   try {
+    const author = await User.findById(req.body.userId);
     const comment = {
       message: req.body.message,
       likes: 0,
+      createdBy: req.body.userId,
+      likedBy: null,
+      displayName: author.name,
     };
-
     const id = req.params.id;
-    console.log(id);
+
     let song;
     if (id === "latest") {
       song = await Song.findOne().sort({ createdAt: -1 });
@@ -77,6 +81,7 @@ export const toggleLike = async (req, res) => {
     const id = req.params.id;
     const commentId = req.params.commentId;
     const increment = req.params.increment;
+
     let song;
 
     if (id === "latest") {

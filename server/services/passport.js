@@ -1,11 +1,8 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
-
+import User from "../models/user.js";
 dotenv.config();
-
-const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -39,12 +36,7 @@ passport.use(
         // Create new user with more profile information
         const newUser = new User({
           googleId: profile.id,
-          email: profile.emails[0].value,
           name: profile.displayName,
-          firstName: profile.name.givenName,
-          lastName: profile.name.familyName,
-          profilePicture: profile.photos[0].value,
-          createdAt: new Date(),
         });
 
         const savedUser = await newUser.save();
@@ -57,4 +49,4 @@ passport.use(
   )
 );
 
-module.exports = passport;
+export default passport;
