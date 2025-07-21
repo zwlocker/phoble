@@ -27,12 +27,12 @@ export const toggleLike = async (
   commentId,
   songId = "latest",
   increment,
-  user
+  userId
 ) => {
   const res = await axios.post(
     `${url}/${songId}/comments/${commentId}/${increment}`,
     {
-      user,
+      userId,
     }
   );
   return res.data;

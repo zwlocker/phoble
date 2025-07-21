@@ -39,7 +39,7 @@ async function main() {
 
   authRoutes(app);
 
-  await addSong();
+  // await addSong();
   app.use("/api/songs", songRouter);
   app.listen(5100);
 }

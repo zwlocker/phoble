@@ -6,9 +6,8 @@ export const addComment = async (req, res) => {
     const author = await User.findById(req.body.userId);
     const comment = {
       message: req.body.message,
-      likes: 0,
       createdBy: req.body.userId,
-      likedBy: null,
+      likedBy: [],
       displayName: author.name,
     };
     const id = req.params.id;
@@ -81,7 +80,7 @@ export const toggleLike = async (req, res) => {
     const id = req.params.id;
     const commentId = req.params.commentId;
     const increment = req.params.increment;
-
+    const userId = req.body.userId;
     let song;
 
     if (id === "latest") {
@@ -90,11 +89,19 @@ export const toggleLike = async (req, res) => {
       song = await Song.findOne({ trackId: id });
     }
 
-    await Song.findOneAndUpdate(
-      { _id: song._id, "comments._id": commentId },
-      { $inc: { "comments.$.likes": increment } },
-      { new: true }
-    );
+    if (increment == 1) {
+      await Song.findOneAndUpdate(
+        { _id: song._id, "comments._id": commentId },
+        { $addToSet: { "comments.$.likedBy": userId } }, //
+        { new: true }
+      );
+    } else {
+      await Song.findOneAndUpdate(
+        { _id: song._id, "comments._id": commentId },
+        { $pull: { "comments.$.likedBy": userId } }, //
+        { new: true }
+      );
+    }
 
     res.status(200).json(song);
   } catch (error) {

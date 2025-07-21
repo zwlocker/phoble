@@ -9,8 +9,19 @@ import { useAuth } from "../../../contexts/AuthContext";
 const Comment = ({ comment, onDelete, songId }) => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
 
-  const [isLiked, setIsLiked] = useState(false);
-  const [likes, setLikes] = useState(comment.likes);
+  const [likes, setLikes] = useState(comment.likedBy.length);
+
+  const checkLike = () => {
+    for (let i = 0; i < comment.likedBy.length; i++) {
+      if (comment.likedBy[i] === user._id) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const [isLiked, setIsLiked] = useState(checkLike);
+
   const handleDeleteComment = async () => {
     await onDelete(comment._id);
   };
@@ -22,8 +33,8 @@ const Comment = ({ comment, onDelete, songId }) => {
 
     setIsLiked(newIsLiked);
     setLikes(likes + increment);
-
-    await toggleLike(comment._id, songId, increment, user);
+    console.log("user on frontend before api pass", user._id);
+    await toggleLike(comment._id, songId, increment, user._id);
   };
 
   return (

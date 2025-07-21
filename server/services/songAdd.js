@@ -10,8 +10,5 @@ export async function addSong() {
   const token = await getAccessToken(id, secret);
   const uri = await getURI(day);
 
-  console.log(token);
-  console.log(uri);
-
   await getData(uri, token, day);
 }
