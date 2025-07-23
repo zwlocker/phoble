@@ -24,8 +24,9 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
       scope: ["profile", "email"],
+      passReqToCallback: true,
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (req, accessToken, refreshToken, profile, done) => {
       try {
         const existingUser = await User.findOne({ googleId: profile.id });
 
