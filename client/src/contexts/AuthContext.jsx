@@ -47,7 +47,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = () => {
-    window.location.href = `${API_BASE_URL}/auth/google`;
+    const currentPage = window.location.pathname + window.location.search;
+    window.location.href = `${API_BASE_URL}/auth/google?returnTo=${encodeURIComponent(currentPage)}`;
   };
 
   const value = {

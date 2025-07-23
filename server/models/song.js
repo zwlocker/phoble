@@ -11,7 +11,9 @@ const comment = new mongoose.Schema({
     type: String,
     required: true,
   },
-});
+},
+{ timestamps: true }
+);
 
 const songSchema = new mongoose.Schema(
   {

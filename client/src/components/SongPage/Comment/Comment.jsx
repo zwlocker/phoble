@@ -36,6 +36,23 @@ const Comment = ({ comment, onDelete, songId }) => {
     await toggleLike(comment._id, songId, increment, user._id);
   };
 
+  const getTimeAgo = (createdAt) => {
+    const now = new Date;
+    const createdAtTime = new Date(createdAt)
+    const diffInMs =  now - createdAtTime;
+
+    const seconds = Math.floor(diffInMs / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    
+    if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+    };
+
+
   return (
     <div className="bg-white/5 rounded-xl p-4 border border-white/10 group hover:bg-white/10 transition-colors duration-200">
       <div className="flex items-start gap-3">
@@ -47,7 +64,7 @@ const Comment = ({ comment, onDelete, songId }) => {
             <span className="font-semibold text-sm text-purple-300">
               {comment.displayName}
             </span>
-            <span className="text-xs text-gray-400">1 hour ago</span>
+            <span className="text-xs text-gray-400">{getTimeAgo(comment.createdAt)}</span>
           </div>
           <p className="text-sm text-gray-200 leading-relaxed">
             {comment.message}
