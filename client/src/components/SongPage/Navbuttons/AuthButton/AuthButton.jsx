@@ -1,10 +1,21 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 const AuthButton = () => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    severity: "success" // "success", "error", "warning", "info"
+  });
+
+  const closeAlert = () => setAlert({ ...alert, open: false });
+
 
   if (loading) {
     return null;
@@ -21,7 +32,11 @@ const AuthButton = () => {
   const handleLogout = () => {
     logout();
     setIsMenuOpen(false);
-    location.reload();
+    setAlert({
+          open: true,
+          message: "You have been successfully logged out.",
+          severity: "info"
+        });
   };
 
   if (loading) {
@@ -71,6 +86,17 @@ const AuthButton = () => {
           Sign in with Google
         </button>
       )}
+
+      <Snackbar
+        open={alert.open}
+        autoHideDuration={3000}
+        onClose={closeAlert}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={closeAlert} severity={alert.severity} variant="filled">
+          {alert.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

@@ -72,12 +72,14 @@ const Comment = ({ comment, onDelete, songId }) => {
         </div>
         <div className="flex">
           <div className="flex flex-col items-center">
+            {user._id === comment.createdBy &&
             <button
               onClick={() => handleDeleteComment(comment._id)}
               className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-red-400 hover:text-red-300 p-1"
             >
               <DeleteIcon className="w-4 h-4" />
             </button>
+            }
             <p />
           </div>
           <div className="flex flex-col items-center">

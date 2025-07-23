@@ -2,7 +2,7 @@ import passport from "passport";
 
 const authRoutes = (app) => {
   app.get("/auth/google", (req, res) => {
-    const state = req.query.state;
+    const state = req.query.returnTo;
     req.session.returnTo = state;
     passport.authenticate("google", {
       scope: ["profile", "email"],
@@ -13,9 +13,8 @@ const authRoutes = (app) => {
   app.get(
     "/auth/google/callback",
     (req, res, next) => {
-      // Check both query.state and session
       const returnTo = req.query.state || req.session.returnTo;
-      req.returnTo = returnTo; // Store for use after authentication
+      req.returnTo = returnTo;
       next();
     },
     passport.authenticate("google"),

@@ -52,7 +52,6 @@ export const deleteComment = async (req, res) => {
 export const getSongs = async (req, res) => {
   try {
     const allSongs = await Song.find();
-    console.log(allSongs);
     res.send(allSongs);
   } catch (error) {
     console.log(error);
