@@ -21,6 +21,7 @@ const AuthButton = () => {
   const handleLogout = () => {
     logout();
     setIsMenuOpen(false);
+    location.reload();
   };
 
   if (loading) {

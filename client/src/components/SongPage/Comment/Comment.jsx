@@ -33,7 +33,6 @@ const Comment = ({ comment, onDelete, songId }) => {
 
     setIsLiked(newIsLiked);
     setLikes(likes + increment);
-    console.log("user on frontend before api pass", user._id);
     await toggleLike(comment._id, songId, increment, user._id);
   };
 
