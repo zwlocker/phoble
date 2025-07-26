@@ -39,12 +39,12 @@ export async function getData(queryString, token, dayCounter) {
       if (dayCounter >= 1 && dayCounter < 4) {
         // Handles popularity gradient
 
-        if (popularity >= 80) {
+        if (popularity >= 90) {
           save = true;
         }
       } else if (dayCounter === 4 || dayCounter === 5) {
         // Middle range
-        if (popularity >= 30 && popularity < 80) {
+        if (popularity >= 30 && popularity < 90) {
           save = true;
         }
       } else if (dayCounter === 6 || dayCounter === 0) {
@@ -55,7 +55,6 @@ export async function getData(queryString, token, dayCounter) {
       }
       //BIG FAT COMMENT ADDED THIS SO WE CAN OVERRIDE POPULARITY ISSUES TO TEST GRID
       save = true;
-      console.log(track);
 
       if (save && !exists) {
         const song = new Song({
@@ -77,18 +76,7 @@ export async function getData(queryString, token, dayCounter) {
 
 // Returns the constructed URI to query Spotify
 export async function getURI(dayCounter) {
-  const genres = [
-    "pop",
-    "rock",
-    "alternative",
-    "club",
-    "indie",
-    "indie-pop",
-    "jazz",
-    "rock",
-    "alt-rock",
-    "country",
-  ]; // Add more genres
+  const genres = ["pop", "rock", "indie", "indie-pop", "jazz", "country"]; // Add more genres
   const letters = ["a", "e", "t", "o", "i"];
 
   let spotifyURI = "https://api.spotify.com/v1/search?";

@@ -30,7 +30,7 @@ async function main() {
       cookie: {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         secure: false,
-        sameSite: 'lax',
+        sameSite: "lax",
       },
     })
   );
@@ -40,7 +40,8 @@ async function main() {
 
   authRoutes(app);
 
-  // await addSong();
+  // await addSong(); Uncomment to add a song
+
   app.use("/api/songs", songRouter);
   app.listen(5100);
 }

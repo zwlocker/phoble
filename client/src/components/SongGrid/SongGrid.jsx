@@ -26,7 +26,7 @@ const SongGrid = () => {
           <Grid
             size={4}
             key={song._id}
-            className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10 max-h-101 cursor-pointer"
+            className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10 max-h-101 cursor-pointer transform transition-transform duration-300 hover:-translate-y-2"
             onClick={() =>
               index === 0 ? navigate("/") : navigate(`/song/${song.trackId}`)
             }

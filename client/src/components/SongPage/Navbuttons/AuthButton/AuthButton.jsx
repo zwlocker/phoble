@@ -1,25 +1,12 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
-import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 const AuthButton = () => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const [alert, setAlert] = useState({
-    open: false,
-    message: "",
-    severity: "success" // "success", "error", "warning", "info"
-  });
-
-  const closeAlert = () => setAlert({ ...alert, open: false });
-
-
-  if (loading) {
-    return null;
-  }
 
   const handleClick = (event) => {
     if (isAuthenticated) {
@@ -31,12 +18,8 @@ const AuthButton = () => {
 
   const handleLogout = () => {
     logout();
+    location.reload();
     setIsMenuOpen(false);
-    setAlert({
-          open: true,
-          message: "You have been successfully logged out.",
-          severity: "info"
-        });
   };
 
   if (loading) {
@@ -86,17 +69,18 @@ const AuthButton = () => {
           Sign in with Google
         </button>
       )}
-
-      <Snackbar
-        open={alert.open}
-        autoHideDuration={3000}
-        onClose={closeAlert}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert onClose={closeAlert} severity={alert.severity} variant="filled">
-          {alert.message}
-        </Alert>
-      </Snackbar>
+      <ToastContainer
+        position="bottom-center"
+        theme="light"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+      />
     </>
   );
 };
