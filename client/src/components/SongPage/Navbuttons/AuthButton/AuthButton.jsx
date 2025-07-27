@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
 
 const AuthButton = () => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
@@ -69,18 +66,6 @@ const AuthButton = () => {
           Sign in with Google
         </button>
       )}
-      <ToastContainer
-        position="bottom-center"
-        theme="light"
-        autoClose={3000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable={false}
-        pauseOnHover={false}
-      />
     </>
   );
 };
