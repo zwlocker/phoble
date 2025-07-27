@@ -51,7 +51,7 @@ const CommentSection = ({ songId }) => {
   };
 
   return (
-    <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10">
+    <div className="bg-white/8 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10">
       <div className="flex items-center gap-2 mb-6">
         <CommentIcon className="w-6 h-6 text-blue-400" />
 

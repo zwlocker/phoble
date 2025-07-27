@@ -26,11 +26,18 @@ const SongGrid = () => {
           <Grid
             size={4}
             key={song._id}
-            className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10 max-h-101 cursor-pointer transform transition-transform duration-300 hover:-translate-y-2"
+            className="bg-white/8 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10 max-h-110 cursor-pointer transform transition-transform duration-300 hover:-translate-y-2"
             onClick={() =>
               index === 0 ? navigate("/") : navigate(`/song/${song.trackId}`)
             }
           >
+            <h3 className="mb-3 text-md  font-bold">
+              {new Date(song.createdAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </h3>
             <Box
               sx={{
                 display: "flex",

@@ -33,7 +33,7 @@ const SongPage = () => {
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Navbuttons />
 
-      <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10">
+      <div className="bg-white/8 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10">
         <Box sx={{ my: 2 }}>
           <Box
             sx={{
