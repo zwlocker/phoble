@@ -4,6 +4,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import AuthButton from "./AuthButton/AuthButton";
+import Timer from "./Timer/Timer";
 
 const Navbuttons = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Navbuttons = () => {
         onClick={() => navigate("/")}
         sx={{ mb: 3, cursor: "pointer" }}
       />
+      <Timer />
       <div className="flex gap-9 h-12 align-center mt-9">
         <button
           onClick={() => navigate("/history")}
