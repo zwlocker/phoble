@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import songRouter from "./routes/song.route.js";
 import express from "express";
-import { addSong } from "./services/songAdd.js";
 import cors from "cors";
 import passport from "./services/passport.js";
 import authRoutes from "./routes/authRoutes.js";
@@ -39,8 +38,6 @@ async function main() {
   app.use(passport.session());
 
   authRoutes(app);
-
-  await addSong();
 
   app.use("/api/songs", songRouter);
   app.listen(5100);

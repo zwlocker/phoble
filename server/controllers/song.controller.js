@@ -1,5 +1,6 @@
 import Song from "../models/song.js";
 import User from "../models/user.js";
+import { addSong } from "../services/songAdd.js";
 
 export const addComment = async (req, res) => {
   try {
@@ -106,4 +107,8 @@ export const toggleLike = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const refreshSong = async (req, res) => {
+  await addSong();
 };
