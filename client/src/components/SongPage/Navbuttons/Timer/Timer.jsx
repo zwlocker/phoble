@@ -3,22 +3,14 @@ import { getSong } from "../../../../api";
 
 const Timer = () => {
   const [song, setSong] = useState(null);
-
-  const date = new Date();
-  let latestSongDate;
-  let countdown;
-
-  //we have time in milliseconds since latest song was added
-  //take away from milliseconds in a day
-  //
-  //mod by milli, seconds, minutes, hours
-  //86400000 milliseconds in a day
+  const [countdown, setCountdown] = useState(null);
+  let data;
 
   useEffect(() => {
     const fetchSong = async () => {
       try {
         const songId = "latest";
-        const data = await getSong(songId);
+        data = await getSong(songId);
 
         setSong(data);
       } catch (error) {
@@ -26,13 +18,25 @@ const Timer = () => {
       }
     };
     fetchSong();
-    latestSongDate = new Date(song.createdAt);
-    setInterval(() => {
-      countdown = date - latestSongDate;
-    }, 1000);
   }, []);
 
-  const countdownInSecs = countdown % 86400000;
+  useEffect(() => {
+    if (!song?.createdAt) return;
+
+    const updateCountdown = () => {
+      const now = new Date();
+      const latestSongDate = new Date(song.createdAt);
+      const timeSinceLastSong = now - latestSongDate;
+
+      const timeUntilNext = 86400000 - (timeSinceLastSong % 86400000);
+      setCountdown(Math.floor(timeUntilNext / 1000)); //converts to seconds
+    };
+
+    updateCountdown();
+
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
+  }, [song]);
 
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
@@ -46,11 +50,11 @@ const Timer = () => {
     };
   };
 
-  const { hours, minutes, seconds } = formatTime(countdownInSecs);
+  const { hours, minutes, seconds } = formatTime(countdown);
   return (
-    <div>
+    <div className="mt-5 text-xl  text-center">
       <h1>Time until next song: </h1>
-      <p>
+      <p className="font-bold text-5xl">
         {hours}:{minutes}:{seconds}
       </p>
     </div>
