@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getSong } from "../../../../api";
+import { refreshSong } from "../../../../api";
 
 const Timer = () => {
   const [song, setSong] = useState(null);
@@ -25,17 +26,25 @@ const Timer = () => {
 
     const updateCountdown = () => {
       const now = new Date();
-      const latestSongDate = new Date(song.createdAt);
+      let latestSongDate = new Date(song.createdAt);
       const timeSinceLastSong = now - latestSongDate;
 
-      const timeUntilNext = 86400000 - (timeSinceLastSong % 86400000);
+      let timeUntilNext = 86400000 - (timeSinceLastSong % 86400000);
       setCountdown(Math.floor(timeUntilNext / 1000)); //converts to seconds
     };
 
     updateCountdown();
 
     const interval = setInterval(updateCountdown, 1000);
-    return () => clearInterval(interval);
+
+    if (countdown == 0) {
+      const refresh = async () => {
+        await refreshSong();
+      };
+      refresh();
+    }
+    const cleanup = () => clearInterval(interval);
+    return cleanup;
   }, [song]);
 
   const formatTime = (seconds) => {

@@ -27,7 +27,7 @@ const SongPage = () => {
     fetchSong();
   }, [id]);
 
-  if (!song) return <Typography>Loading...</Typography>;
+  if (!song) return null;
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>

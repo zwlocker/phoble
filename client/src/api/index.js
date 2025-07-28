@@ -3,7 +3,9 @@ import axios from "axios";
 const url = "http://localhost:5100/api/songs";
 
 export const getSong = async (songId = "latest") => {
-  return axios.get(`${url}/${songId}`).then((response) => response.data);
+  const res = await axios.get(`${url}/${songId}`);
+
+  return res.data;
 };
 
 export const addComment = async (message, songId = "latest", userId) => {
@@ -19,8 +21,9 @@ export const deleteComment = async (commentId, songId = "latest") => {
   return res.data;
 };
 
-export const getSongs = () => {
-  return axios.get(`${url}`).then((response) => response.data);
+export const getSongs = async () => {
+  const res = await axios.get(`${url}`);
+  return res.data;
 };
 
 export const toggleLike = async (
@@ -35,5 +38,10 @@ export const toggleLike = async (
       userId,
     }
   );
+  return res.data;
+};
+
+export const refreshSong = async () => {
+  const res = await axios.post(`${url}/refresh`);
   return res.data;
 };
