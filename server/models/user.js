@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { comment } from "./song.js";
 
 const userSchema = new mongoose.Schema({
   googleId: {
@@ -20,6 +21,11 @@ const userSchema = new mongoose.Schema({
     required: false,
     unique: true,
     maxlength: 25,
+  },
+
+  pastComments: {
+    type: [comment],
+    required: false,
   },
 });
 

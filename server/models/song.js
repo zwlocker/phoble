@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const comment = new mongoose.Schema(
+export const comment = new mongoose.Schema(
   {
     message: {
       type: String,

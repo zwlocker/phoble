@@ -1,11 +1,15 @@
 import Song from "../models/song.js";
 import User from "../models/user.js";
 import { addSong } from "../services/songAdd.js";
+import mongoose from "mongoose";
 
 export const addComment = async (req, res) => {
   try {
     const author = await User.findById(req.body.userId);
+    const commentId = new mongoose.Types.ObjectId();
+
     const comment = {
+      _id: commentId,
       message: req.body.message,
       createdBy: req.body.userId,
       likedBy: [],
@@ -20,6 +24,9 @@ export const addComment = async (req, res) => {
       song = await Song.findOne({ trackId: id });
     }
 
+    author.pastComments.push(comment);
+    await author.save();
+
     song.comments.push(comment);
     await song.save();
 
@@ -32,6 +39,7 @@ export const addComment = async (req, res) => {
 export const deleteComment = async (req, res) => {
   try {
     const id = req.params.id || "latest";
+    const commentId = req.params.commentId;
     let song;
 
     if (id === "latest") {
@@ -39,11 +47,23 @@ export const deleteComment = async (req, res) => {
     } else {
       song = await Song.findOne({ trackId: id });
     }
+
+    const commentToDelete = song.comments.find(
+      (comment) => comment._id.toString() === commentId
+    );
+
     await Song.findByIdAndUpdate(
       song._id,
-      { $pull: { comments: { _id: req.params.commentId } } }, //
+      { $pull: { comments: { _id: commentId } } },
       { new: true }
     );
+
+    await User.findByIdAndUpdate(
+      commentToDelete.createdBy,
+      { $pull: { pastComments: { _id: commentId } } },
+      { new: true }
+    );
+
     res.status(201).json(song.comments.at(-1));
   } catch (error) {
     console.log(error);
@@ -83,6 +103,8 @@ export const toggleLike = async (req, res) => {
     const userId = req.body.userId;
     let song;
 
+    const user = await User.findById(req.body.userId);
+
     if (id === "latest") {
       song = await Song.findOne().sort({ createdAt: -1 });
     } else {
@@ -95,12 +117,15 @@ export const toggleLike = async (req, res) => {
         { $addToSet: { "comments.$.likedBy": userId } }, //
         { new: true }
       );
+
+      await user.save();
     } else {
       await Song.findOneAndUpdate(
         { _id: song._id, "comments._id": commentId },
         { $pull: { "comments.$.likedBy": userId } }, //
         { new: true }
       );
+      await user.save();
     }
 
     res.status(200).json(song);
