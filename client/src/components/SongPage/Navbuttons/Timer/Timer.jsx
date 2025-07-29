@@ -5,13 +5,12 @@ import { refreshSong } from "../../../../api";
 const Timer = () => {
   const [song, setSong] = useState(null);
   const [countdown, setCountdown] = useState(null);
-  let data;
 
   useEffect(() => {
     const fetchSong = async () => {
       try {
         const songId = "latest";
-        data = await getSong(songId);
+        const data = await getSong(songId);
 
         setSong(data);
       } catch (error) {

@@ -38,8 +38,7 @@ const CommentSection = ({ songId }) => {
     }
   }, [songId, comments]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     const res = await addComment(message, songId, user._id);
     setComments((prev) => [...prev, res]);
     setMessage("");
@@ -51,7 +50,7 @@ const CommentSection = ({ songId }) => {
   };
 
   return (
-    <div className="bg-white/8 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10">
+    <div className="bg-white/8 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-15">
       <div className="flex items-center gap-2 mb-6">
         <CommentIcon className="w-6 h-6 text-blue-400" />
 
@@ -70,7 +69,6 @@ const CommentSection = ({ songId }) => {
                   className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
                 <Button
-                  type="submit"
                   variant="contained"
                   className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-200 shadow-lg disabled:opacity-50"
                   onClick={handleSubmit}

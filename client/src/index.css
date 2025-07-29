@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
+html {
+  background-color: #220e52;
+}
 body {
+  padding-top: 1px;
+  padding-bottom: 1px;
   background: linear-gradient(to bottom right, #4a1962, #172d6a, #1a1844);
   color: white;
   min-height: 100vh;
   font-family: "Gill Sans";
+  overflow-x: hidden;
 }

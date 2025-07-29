@@ -45,3 +45,11 @@ export const refreshSong = async () => {
   const res = await axios.post(`${url}/refresh`);
   return res.data;
 };
+
+export const initUser = async (userId, username) => {
+  const res = await axios.post(`${url}/initUser`, {
+    userId,
+    username,
+  });
+  return res.data;
+};

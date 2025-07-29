@@ -1,6 +1,5 @@
 import React from "react";
 import HistoryIcon from "@mui/icons-material/History";
-import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import AuthButton from "./AuthButton/AuthButton";
@@ -16,6 +15,7 @@ const Navbuttons = () => {
         height={110}
         onClick={() => navigate("/")}
         sx={{ mb: 3, cursor: "pointer" }}
+        className="transition hover:scale-102 hover:rotate-1 transition-transform ease-in-out"
       />
       <Timer />
       <div className="flex gap-9 h-12 align-center mt-9">

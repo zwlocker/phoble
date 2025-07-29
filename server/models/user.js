@@ -14,6 +14,13 @@ const userSchema = new mongoose.Schema({
     trim: true,
     maxlength: 100,
   },
+
+  username: {
+    type: String,
+    required: false,
+    unique: true,
+    maxlength: 25,
+  },
 });
 
 export default mongoose.model("User", userSchema);

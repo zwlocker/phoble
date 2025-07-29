@@ -31,7 +31,7 @@ const AuthButton = () => {
             onClick={handleClick}
             className="flex items-center space-x-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-xl hover:bg-white/20 hover:border-white/30 transition-all duration-200 font-medium cursor-pointer"
           >
-            {user.name}
+            {user.username}
           </button>
 
           {isMenuOpen && (

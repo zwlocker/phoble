@@ -1,18 +1,19 @@
 import mongoose from "mongoose";
 
-const comment = new mongoose.Schema({
-  message: {
-    type: String,
-    required: true,
+const comment = new mongoose.Schema(
+  {
+    message: {
+      type: String,
+      required: true,
+    },
+    likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    displayName: {
+      type: String,
+      required: true,
+    },
   },
-  likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  displayName: {
-    type: String,
-    required: true,
-  },
-},
-{ timestamps: true }
+  { timestamps: true }
 );
 
 const songSchema = new mongoose.Schema(

@@ -3,6 +3,7 @@ import SongPage from "./components/SongPage/SongPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SongGrid from "./components/SongGrid/SongGrid";
 import { AuthProvider } from "./contexts/AuthContext";
+import Init from "./components/Init/Init";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
           <Route path="/" element={<SongPage />} />
           <Route path="/song/:id" element={<SongPage />} />
           <Route path="/history" element={<SongGrid />} />
+          <Route path="/inituser" element={<Init />} />
         </Routes>
       </AuthProvider>
     </Router>

@@ -1,0 +1,50 @@
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import React, { useState } from "react";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useAuth } from "../../contexts/AuthContext";
+import { initUser } from "../../api";
+
+const Init = () => {
+  const { user, isAuthenticated, login, logout, loading } = useAuth();
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = async () => {
+    await initUser(user._id, username);
+    location.href = "http://localhost:5173";
+  };
+
+  return (
+    <div className="flex flex-col items-center h-screen overflow-hidden justify-center gap-12">
+      <Box
+        component="img"
+        src="../../../logo.png"
+        height={110}
+        onClick={() => navigate("/")}
+        sx={{ mb: 3, cursor: "pointer" }}
+      />
+      <div className="text-center mb-90">
+        <h1 className="text-3xl mb-6">How would you like to be known?</h1>
+        <div className="flex gap-5">
+          <input
+            type="text"
+            value={username}
+            placeholder="phoblelover123"
+            onChange={(e) => setUsername(e.target.value)}
+            className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-200 shadow-lg disabled:opacity-50"
+            onClick={handleSubmit}
+          >
+            <ArrowForwardIcon />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Init;

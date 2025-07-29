@@ -6,6 +6,7 @@ import {
   getSong,
   toggleLike,
   refreshSong,
+  initUser,
 } from "../controllers/song.controller.js";
 
 const router = express.Router(); //create router object using Router constructor from express
@@ -17,5 +18,6 @@ router.delete("/:id/comments/:commentId", deleteComment);
 router.get("/", getSongs);
 router.post("/:id/comments/:commentId/:increment", toggleLike);
 router.post("/refresh", refreshSong);
+router.post("/initUser", initUser);
 
 export default router;

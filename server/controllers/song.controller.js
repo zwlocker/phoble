@@ -9,7 +9,7 @@ export const addComment = async (req, res) => {
       message: req.body.message,
       createdBy: req.body.userId,
       likedBy: [],
-      displayName: author.name,
+      displayName: author.username,
     };
     const id = req.params.id;
 
@@ -111,4 +111,21 @@ export const toggleLike = async (req, res) => {
 
 export const refreshSong = async (req, res) => {
   await addSong();
+};
+
+export const initUser = async (req, res) => {
+  try {
+    const userId = req.body.userId;
+    const username = req.body.username;
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { username: username },
+      { new: true }
+    );
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+  }
 };

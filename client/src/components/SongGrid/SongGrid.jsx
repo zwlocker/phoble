@@ -19,7 +19,7 @@ const SongGrid = () => {
 
   const navigate = useNavigate();
   return (
-    <Container maxWidth="lg" sx={{ mt: 4 }}>
+    <Container maxWidth="lg" sx={{ mt: 4 }} className="mb-10">
       <Navbuttons />
       <Grid container spacing={5} sx={{ textAlign: "center" }}>
         {songs.toReversed().map((song, index) => (

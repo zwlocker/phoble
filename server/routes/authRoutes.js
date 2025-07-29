@@ -24,7 +24,10 @@ const authRoutes = (app) => {
         : "http://localhost:5173";
 
       delete req.session.returnTo;
-      res.redirect(returnTo);
+
+      req.user.username
+        ? res.redirect(returnTo)
+        : res.redirect("http://localhost:5173/initUser");
     }
   );
 
