@@ -36,15 +36,19 @@ const Timer = () => {
 
     const interval = setInterval(updateCountdown, 1000);
 
-    if (countdown == 0) {
+    const cleanup = () => clearInterval(interval);
+    return cleanup;
+  }, [song]);
+
+  useEffect(() => {
+    if (countdown === 0) {
       const refresh = async () => {
+        console.log("Timer is 0");
         await refreshSong();
       };
       refresh();
     }
-    const cleanup = () => clearInterval(interval);
-    return cleanup;
-  }, [song]);
+  }, [countdown]);
 
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);

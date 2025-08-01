@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getSong } from "../../api/index";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Player from "../Player/Player";
 import CommentSection from "./CommentSection/CommentSection";
 import CommentIcon from "@mui/icons-material/Comment";
