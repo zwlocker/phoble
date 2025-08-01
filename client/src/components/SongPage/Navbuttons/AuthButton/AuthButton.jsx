@@ -42,15 +42,18 @@ const AuthButton = () => {
               />
 
               <div
-                className="absolute top-full left-0 w-full mt-2 bg-white/95 backdrop-blur-xl border border-white/30 rounded-2xl shadow-2xl overflow-hidden z-50"
+                className="absolute top-full left-0 w-full mt-2 bg-black/40 backdrop-blur-xl border border-white/30 rounded-2xl shadow-2xl overflow-hidden z-50"
                 style={{
                   boxShadow:
                     "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
                 }}
               >
+                <button className="w-full px-6 py-3 hover:bg-white/20 font-medium text-sm flex items-center justify-center min-h-[44px] cursor-pointer">
+                  Profile
+                </button>
                 <button
                   onClick={handleLogout}
-                  className="w-full px-6 py-3 text-red-600 hover:bg-red-50 hover:text-red-700 transition-all duration-200 font-medium text-sm flex items-center justify-center min-h-[44px] cursor-pointer"
+                  className="w-full px-6 py-3 hover:bg-white/20 font-medium text-sm flex items-center justify-center min-h-[44px] cursor-pointer"
                 >
                   Logout
                 </button>
