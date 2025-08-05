@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import HistoryIcon from "@mui/icons-material/History";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import AuthButton from "./AuthButton/AuthButton";
 import Timer from "./Timer/Timer";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import Info from "../../Info/Info";
 
 const Navbuttons = () => {
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+
+  const onClose = () => {
+    setIsInfoOpen(false);
+  };
+
   const navigate = useNavigate();
   return (
     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      {isInfoOpen && <Info onClose={onClose} />}
       <Box
         component="img"
         src="../../../logo.png"
@@ -20,7 +28,12 @@ const Navbuttons = () => {
       />
       <Timer />
       <div className="flex gap-9 h-12 items-center mt-9">
-        <button className="px-3 h-10 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-3xl hover:bg-white/20 hover:border-white/30 transition-all duration-200 cursor-pointer">
+        <button
+          onClick={() => {
+            setIsInfoOpen(true);
+          }}
+          className="px-3 h-10 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-3xl hover:bg-white/20 hover:border-white/30 transition-all duration-200 cursor-pointer"
+        >
           <QuestionMarkIcon sx={{ fontSize: 16 }} />
         </button>
         <button
