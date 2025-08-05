@@ -8,14 +8,14 @@ const Info = ({ onClose }) => {
   };
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 backdrop-blur-[2px]"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-[2px]"
       onClick={handleBackdropClick}
     >
-      <div className="bg-[#180647]  backdrop-blur-md border-2 border-violet-400 rounded-xl p-8 mx-4 max-w-xl w-full text-center shadow-xl">
-        <h1 className="text-2xl font-bold mb-4 text-violet-200">
+      <div className="bg-[#190338] space-y-4 backdrop-blur-md border border-violet-400/60 rounded-xl p-8 mx-4 max-w-xl w-full text-center shadow-2xl">
+        <h1 className="text-3xl font-bold mb-4 text-violet-100">
           Welcome to Phoble
         </h1>
-        <p className="leading-relaxed">
+        <p className="leading-relaxed text-left">
           Phoble works by querying Spotify's public API to generate the song of
           the day. Our algorithm is designed to display songs on a popularity
           gradient, which gives users a mix of familiar favorites and songs they
@@ -25,7 +25,7 @@ const Info = ({ onClose }) => {
           introduce users to different tastes and perspectives.
         </p>
         <br />
-        <p className="leading-relaxed">
+        <p className="leading-relaxed text-left">
           Anyone can listen to snippets of every song directly on our website.
           The full versions of each song are only displayed to users who are
           logged into Spotify. Phoble is not directly affiliated with Spotify in
