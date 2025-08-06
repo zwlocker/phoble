@@ -158,7 +158,7 @@ export const initUser = async (req, res) => {
       return res.status(400).json({ error: "Username is not allowed" });
     }
 
-    const existingUser = await User.findOne({ usename: username });
+    const existingUser = await User.findOne({ username: username });
     if (existingUser) {
       return res.status(409).json({ error: "Username is already taken" });
     }

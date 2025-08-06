@@ -8,6 +8,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { useAuth } from "../../../contexts/AuthContext";
 import AuthButton from "../Navbuttons/AuthButton/AuthButton";
 import CommentBlocker from "./CommentBlocker/CommentBlocker";
+import { toast } from "react-toastify";
 
 const CommentSection = ({ songId }) => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
@@ -42,6 +43,11 @@ const CommentSection = ({ songId }) => {
     const res = await addComment(message, songId, user._id);
     setComments((prev) => [...prev, res]);
     setMessage("");
+    toast.clearWaitingQueue();
+    toast.success("Comment added successfully", {
+      className:
+        "bg-green-500/60 text-white border border-green-400/30 rounded-xl",
+    });
   };
 
   const handleDeleteComment = async (commentId) => {

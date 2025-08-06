@@ -5,6 +5,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { useAuth } from "../../../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const Comment = ({ comment, onDelete, songId }) => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
@@ -24,6 +25,10 @@ const Comment = ({ comment, onDelete, songId }) => {
 
   const handleDeleteComment = async () => {
     await onDelete(comment._id);
+    toast.clearWaitingQueue();
+    toast.error("Comment deleted successfully", {
+      className: "bg-red-500/60 text-white border border-red-400/30 rounded-xl",
+    });
   };
 
   const handleLikeComment = async () => {

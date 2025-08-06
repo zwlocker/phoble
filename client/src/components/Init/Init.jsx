@@ -1,22 +1,39 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useAuth } from "../../contexts/AuthContext";
 import { initUser } from "../../api";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Init = () => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
   const [username, setUsername] = useState("");
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!loading) {
+      if (!isAuthenticated || user?.username) {
+        navigate("/");
+        return;
+      }
+    }
+  }, [user, isAuthenticated, loading]);
+
+  if (loading) {
+    return null;
+  }
   const handleSubmit = async () => {
     const result = await initUser(user._id, username);
     if (result.success) {
       location.href = "http://localhost:5173";
     } else {
       toast.clearWaitingQueue();
-      toast.error(result.error);
+      toast.error(result.error, {
+        className:
+          "bg-red-500/20 text-white border border-red-400/30 rounded-xl",
+      });
     }
   };
 

@@ -26,7 +26,7 @@ const App = () => {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="dark"
+          theme
           transition={Zoom}
           limit={3}
         />
