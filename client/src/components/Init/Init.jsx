@@ -4,14 +4,20 @@ import React, { useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useAuth } from "../../contexts/AuthContext";
 import { initUser } from "../../api";
+import { toast } from "react-toastify";
 
 const Init = () => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
   const [username, setUsername] = useState("");
 
   const handleSubmit = async () => {
-    await initUser(user._id, username);
-    location.href = "http://localhost:5173";
+    const result = await initUser(user._id, username);
+    if (result.success) {
+      location.href = "http://localhost:5173";
+    } else {
+      toast.clearWaitingQueue();
+      toast.error(result.error);
+    }
   };
 
   return (

@@ -47,9 +47,14 @@ export const refreshSong = async () => {
 };
 
 export const initUser = async (userId, username) => {
-  const res = await axios.post(`${url}/initUser`, {
-    userId,
-    username,
-  });
-  return res.data;
+  try {
+    const res = await axios.post(`${url}/initUser`, {
+      userId,
+      username,
+    });
+
+    return { success: true, data: res.data };
+  } catch (error) {
+    return { success: false, error: error.response.data.error };
+  }
 };

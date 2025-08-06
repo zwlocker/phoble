@@ -2,6 +2,7 @@ import Song from "../models/song.js";
 import User from "../models/user.js";
 import { addSong } from "../services/songAdd.js";
 import mongoose from "mongoose";
+import hasProfanity from "../services/profanityFilter.js";
 
 export const addComment = async (req, res) => {
   try {
@@ -142,6 +143,25 @@ export const initUser = async (req, res) => {
   try {
     const userId = req.body.userId;
     const username = req.body.username;
+
+    if (!username) {
+      return res.status(400).json({ error: "Username cannot be empty" });
+    }
+
+    if (username.length > 25) {
+      return res
+        .status(400)
+        .json({ error: "Username length cannot exceed 25 characters" });
+    }
+
+    if (hasProfanity(username)) {
+      return res.status(400).json({ error: "Username is not allowed" });
+    }
+
+    const existingUser = await User.findOne({ usename: username });
+    if (existingUser) {
+      return res.status(409).json({ error: "Username is already taken" });
+    }
 
     const user = await User.findByIdAndUpdate(
       userId,
