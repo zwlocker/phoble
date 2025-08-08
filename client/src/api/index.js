@@ -8,10 +8,16 @@ export const getSong = async (songId = "latest") => {
   return res.data;
 };
 
-export const addComment = async (message, songId = "latest", userId) => {
+export const addComment = async (
+  message,
+  songId = "latest",
+  userId,
+  rating
+) => {
   const res = await axios.post(`${url}/${songId}/comments`, {
     message,
     userId,
+    rating,
   });
   return res.data;
 };

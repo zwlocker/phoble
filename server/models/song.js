@@ -12,6 +12,10 @@ export const comment = new mongoose.Schema(
       type: String,
       required: true,
     },
+    stars: {
+      type: Number,
+      required: false,
+    },
   },
   { timestamps: true }
 );

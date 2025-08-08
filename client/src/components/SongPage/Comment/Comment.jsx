@@ -6,6 +6,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { useAuth } from "../../../contexts/AuthContext";
 import { toast } from "react-toastify";
+import StarIcon from "@mui/icons-material/Star";
+import StarHalfIcon from "@mui/icons-material/StarHalf";
 
 const Comment = ({ comment, onDelete, songId }) => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
@@ -41,6 +43,12 @@ const Comment = ({ comment, onDelete, songId }) => {
     await toggleLike(comment._id, songId, increment, user._id);
   };
 
+  const renderStars = (rating) => {
+    return Array.from({ length: Math.floor(rating) }, (_, index) => (
+      <StarIcon key={index} className="text-amber-400" fontSize="small" />
+    ));
+  };
+
   const getTimeAgo = (createdAt) => {
     const now = new Date();
     const createdAtTime = new Date(createdAt);
@@ -67,6 +75,12 @@ const Comment = ({ comment, onDelete, songId }) => {
           <div className="flex items-center gap-2 mb-1">
             <span className="font-semibold text-sm text-purple-300">
               {comment.displayName}
+            </span>
+            <span className="text-xs">
+              {renderStars(comment.stars)}
+              {comment.stars % 1 !== 0 && (
+                <StarHalfIcon className="text-amber-400" fontSize="small" />
+              )}
             </span>
             <span className="text-xs text-gray-400">
               {getTimeAgo(comment.createdAt)}

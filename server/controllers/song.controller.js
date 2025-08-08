@@ -15,6 +15,7 @@ export const addComment = async (req, res) => {
       createdBy: req.body.userId,
       likedBy: [],
       displayName: author.username,
+      stars: req.body.rating,
     };
     const id = req.params.id;
 

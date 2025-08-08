@@ -9,6 +9,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import AuthButton from "../Navbuttons/AuthButton/AuthButton";
 import CommentBlocker from "./CommentBlocker/CommentBlocker";
 import { toast } from "react-toastify";
+import StarRating from "./StarRating/StarRating";
 
 const CommentSection = ({ songId }) => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
@@ -16,6 +17,7 @@ const CommentSection = ({ songId }) => {
   const [message, setMessage] = useState("");
   const [comments, setComments] = useState([]);
   const [hasCommented, setHasCommented] = useState(false);
+  const [rating, setRating] = useState(null);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -40,9 +42,10 @@ const CommentSection = ({ songId }) => {
   }, [songId, comments]);
 
   const handleSubmit = async () => {
-    const res = await addComment(message, songId, user._id);
+    const res = await addComment(message, songId, user._id, rating);
     setComments((prev) => [...prev, res]);
     setMessage("");
+    setRating(0);
     toast.clearWaitingQueue();
     toast.success("Comment added successfully", {
       className:
@@ -57,10 +60,12 @@ const CommentSection = ({ songId }) => {
 
   return (
     <div className="bg-white/8 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-15">
-      <div className="flex items-center gap-2 mb-6">
+      <div className="flex gap-2 items-center mb-6">
         <CommentIcon className="w-6 h-6 text-blue-400" />
 
         <h3 className="text-2xl font-bold">Comments</h3>
+
+        <StarRating rating={rating} setRating={setRating} />
       </div>
       <div className="mb-6">
         <div className="flex gap-3">
