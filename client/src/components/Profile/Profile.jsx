@@ -5,6 +5,9 @@ import { useAuth } from "../../contexts/AuthContext";
 
 const Profile = () => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
+  if (!user) {
+    return null;
+  }
   const comments = user.pastComments;
   console.log(comments);
 
@@ -32,8 +35,8 @@ const Profile = () => {
         </h2>
         <div className="space-y-4 max-h-96 overflow-y-auto break-words">
           {comments.map((comment) => (
-            <div className="bg-white/5 rounded-xl p-4 border border-white/10 group hover:bg-white/10 transition-colors duration-200">
-              <div className="flex items-start gap-3">hello</div>
+            <div className="bg-white/5 rounded-xl p-4 border border-white/10 group hover:bg-white/10 transition-colors duration-200" key={comment._id}>
+              <div className="flex items-start gap-3">{comment.message}</div>
             </div>
           ))}
         </div>
