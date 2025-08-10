@@ -16,6 +16,14 @@ export const comment = new mongoose.Schema(
       type: Number,
       required: false,
     },
+    songName: {
+      type: String,
+      required: true,
+    },
+    songCover: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

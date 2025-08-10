@@ -9,14 +9,6 @@ export const addComment = async (req, res) => {
     const author = await User.findById(req.body.userId);
     const commentId = new mongoose.Types.ObjectId();
 
-    const comment = {
-      _id: commentId,
-      message: req.body.message,
-      createdBy: req.body.userId,
-      likedBy: [],
-      displayName: author.username,
-      stars: req.body.rating,
-    };
     const id = req.params.id;
 
     let song;
@@ -25,6 +17,19 @@ export const addComment = async (req, res) => {
     } else {
       song = await Song.findOne({ trackId: id });
     }
+    
+    console.log(song);
+
+    const comment = {
+      _id: commentId,
+      message: req.body.message,
+      createdBy: req.body.userId,
+      likedBy: [],
+      displayName: author.username,
+      stars: req.body.rating,
+      songName: song.name,
+      songCover: song.cover,
+    };
 
     author.pastComments.push(comment);
     await author.save();
