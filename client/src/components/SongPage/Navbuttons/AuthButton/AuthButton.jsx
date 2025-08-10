@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 
 const AuthButton = () => {
+  const navigate = useNavigate();
+
   const { user, isAuthenticated, login, logout, loading } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -48,7 +52,7 @@ const AuthButton = () => {
                     "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
                 }}
               >
-                <button className="w-full px-6 py-3 hover:bg-white/20 font-medium text-sm flex items-center justify-center min-h-[44px] cursor-pointer">
+                <button className="w-full px-6 py-3 hover:bg-white/20 font-medium text-sm flex items-center justify-center min-h-[44px] cursor-pointer" onClick={() => navigate("/profile")}>
                   Profile
                 </button>
                 <button

@@ -5,6 +5,7 @@ import SongGrid from "./components/SongGrid/SongGrid";
 import { AuthProvider } from "./contexts/AuthContext";
 import Init from "./components/Init/Init";
 import { ToastContainer, Zoom } from "react-toastify";
+import Profile from "./components/Profile/Profile";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/song/:id" element={<SongPage />} />
           <Route path="/history" element={<SongGrid />} />
           <Route path="/inituser" element={<Init />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <ToastContainer
           position="bottom-center"
