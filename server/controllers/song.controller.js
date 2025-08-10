@@ -149,6 +149,10 @@ export const initUser = async (req, res) => {
       return res.status(400).json({ error: "Username cannot be empty" });
     }
 
+    if (username.includes(" ")) {
+      return res.status(400).json({ error: "Username cannot have spaces" });
+    }
+
     if (username.length > 25) {
       return res
         .status(400)

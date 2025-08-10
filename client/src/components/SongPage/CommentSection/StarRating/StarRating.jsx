@@ -3,8 +3,6 @@ import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 
 const StarRating = ({ rating, setRating }) => {
-  console.log(rating);
-
   return (
     <Rating
       value={rating}

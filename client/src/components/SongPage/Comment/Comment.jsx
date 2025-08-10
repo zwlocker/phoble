@@ -76,12 +76,14 @@ const Comment = ({ comment, onDelete, songId }) => {
             <span className="font-semibold text-sm text-purple-300">
               {comment.displayName}
             </span>
-            <span className="text-xs">
-              {renderStars(comment.stars)}
-              {comment.stars % 1 !== 0 && (
-                <StarHalfIcon className="text-amber-400" fontSize="small" />
-              )}
-            </span>
+            {comment.stars != 0 && (
+              <span className="text-xs">
+                {renderStars(comment.stars)}
+                {comment.stars % 1 !== 0 && (
+                  <StarHalfIcon className="text-amber-400" fontSize="small" />
+                )}
+              </span>
+            )}
             <span className="text-xs text-gray-400">
               {getTimeAgo(comment.createdAt)}
             </span>
