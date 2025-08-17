@@ -102,7 +102,6 @@ const Comment = ({ comment, onDelete, songId }) => {
                 <DeleteIcon className="w-4 h-4" />
               </button>
             )}
-            <p />
           </div>
           <div className="flex flex-col items-center">
             <button
@@ -110,7 +109,7 @@ const Comment = ({ comment, onDelete, songId }) => {
               className="text-red-400 hover:text-red-300 p-1"
             >
               {isLiked ? (
-                <FavoriteIcon className="w-4 h-4" />
+                <FavoriteIcon />
               ) : (
                 <FavoriteBorderOutlinedIcon className="w-4 h-4" />
               )}

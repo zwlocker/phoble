@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Comment from "../Comment/Comment";
@@ -18,6 +18,34 @@ const CommentSection = ({ songId }) => {
   const [comments, setComments] = useState([]);
   const [hasCommented, setHasCommented] = useState(false);
   const [rating, setRating] = useState(null);
+  const [sortBy, setSortBy] = useState("newest");
+
+  // Memoized filtered and sorted comments
+  const sortedComments = useMemo(() => {
+    const commentsCopy = [...comments];
+
+    switch (sortBy) {
+      case "newest":
+        return commentsCopy.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+
+      case "oldest":
+        return commentsCopy.sort(
+          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+        );
+
+      case "popular":
+        return commentsCopy.sort((a, b) => {
+          const aLikes = a.likedBy.length || 0;
+          const bLikes = b.likedBy.length || 0;
+          return bLikes - aLikes;
+        });
+
+      default:
+        return commentsCopy;
+    }
+  }, [comments, sortBy]);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -41,7 +69,19 @@ const CommentSection = ({ songId }) => {
     }
   }, [songId, comments]);
 
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+  };
+
   const handleSubmit = async () => {
+    if (message == "" || message.trim().length === 0) {
+      toast.clearWaitingQueue();
+      toast.error("Comment must contain characters", {
+        className:
+          "bg-red-500/60 text-white border border-red-400/30 rounded-xl",
+      });
+      return;
+    }
     const res = await addComment(message, songId, user._id, rating);
     setComments((prev) => [...prev, res]);
     setMessage("");
@@ -66,6 +106,15 @@ const CommentSection = ({ songId }) => {
         <h3 className="text-2xl font-bold">Comments</h3>
 
         <StarRating rating={rating} setRating={setRating} />
+        <select
+          value={sortBy}
+          onChange={handleSortChange}
+          className="border border-white/10 bg-white/5 border rounded-md ml-3"
+        >
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="popular">Most Popular</option>
+        </select>
       </div>
       <div className="mb-6">
         <div className="flex gap-3">
@@ -105,7 +154,7 @@ const CommentSection = ({ songId }) => {
       </div>
       {hasCommented ? (
         <div className="space-y-4 max-h-96 overflow-y-auto break-words">
-          {comments.map((comment) => (
+          {sortedComments.map((comment) => (
             <Comment
               key={comment._id}
               comment={comment}

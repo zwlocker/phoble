@@ -17,7 +17,7 @@ export const addComment = async (req, res) => {
     } else {
       song = await Song.findOne({ trackId: id });
     }
-    
+
     console.log(song);
 
     const comment = {
@@ -71,7 +71,7 @@ export const deleteComment = async (req, res) => {
       { new: true }
     );
 
-    res.status(201).json(song.comments.at(-1));
+    res.status(200).json(song.comments.at(-1));
   } catch (error) {
     console.log(error);
   }
@@ -125,14 +125,20 @@ export const toggleLike = async (req, res) => {
         { new: true }
       );
 
-      await user.save();
+      await User.findOneAndUpdate(
+        { "pastComments._id": commentId },
+        { $addToSet: { "pastComments.$.likedBy": userId } }
+      );
     } else {
       await Song.findOneAndUpdate(
         { _id: song._id, "comments._id": commentId },
         { $pull: { "comments.$.likedBy": userId } }, //
         { new: true }
       );
-      await user.save();
+      await User.findOneAndUpdate(
+        { "pastComments._id": commentId },
+        { $pull: { "pastComments.$.likedBy": userId } }
+      );
     }
 
     res.status(200).json(song);

@@ -24,7 +24,7 @@ const SongGrid = () => {
       <Grid container spacing={5} sx={{ textAlign: "center" }}>
         {songs.toReversed().map((song, index) => (
           <Grid
-            size={4}
+            size={{ sm: 6, md: 4, xs: 12 }}
             key={song._id}
             className="bg-white/8 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-10 max-h-110 cursor-pointer transform transition-transform duration-300 hover:-translate-y-3 hover:border-pink-300"
             onClick={() =>

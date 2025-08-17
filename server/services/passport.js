@@ -34,10 +34,12 @@ passport.use(
           return done(null, existingUser);
         }
 
+        console.log(profile.emails);
         // Create new user with more profile information
         const newUser = new User({
           googleId: profile.id,
           name: profile.displayName,
+          email: profile.emails[0].value,
         });
 
         const savedUser = await newUser.save();

@@ -24,6 +24,11 @@ const userSchema = new mongoose.Schema(
       maxlength: 25,
     },
 
+    email: {
+      type: String,
+      required: false,
+    },
+
     pastComments: {
       type: [comment],
       required: false,

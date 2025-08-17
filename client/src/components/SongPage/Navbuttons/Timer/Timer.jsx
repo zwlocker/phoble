@@ -64,8 +64,8 @@ const Timer = () => {
 
   const { hours, minutes, seconds } = formatTime(countdown);
   return (
-    <div className="mt-5 text-xl  text-center">
-      <h1>Time until next song: </h1>
+    <div className="mt-5 text-xl font-semibold text-left">
+      <h1>New song in: </h1>
       <p className="font-bold text-5xl">
         {hours}:{minutes}:{seconds}
       </p>
