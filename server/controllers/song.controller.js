@@ -164,6 +164,10 @@ export const initUser = async (req, res) => {
       return res.status(400).json({ error: "Username cannot have spaces" });
     }
 
+    if (username !== username.toLowerCase()) {
+      return res.status(400).json({ error: "Username must be lowercase" });
+    }
+
     if (username.length > 25) {
       return res
         .status(400)

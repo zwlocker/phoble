@@ -8,6 +8,9 @@ const AuthButton = () => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  if (isAuthenticated && !user.username) {
+    navigate("/initUser", { replace: true });
+  }
   const handleClick = (event) => {
     if (isAuthenticated) {
       setIsMenuOpen(!isMenuOpen);

@@ -47,7 +47,7 @@ const Init = () => {
         sx={{ mb: 3, cursor: "pointer" }}
       />
       <div className="text-center mb-90">
-        <h1 className="text-3xl mb-6">How would you like to be known?</h1>
+        <h1 className="text-3xl mb-6">Choose your display name</h1>
         <div className="flex gap-5">
           <input
             type="text"

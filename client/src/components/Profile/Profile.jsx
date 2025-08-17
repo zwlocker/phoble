@@ -40,7 +40,13 @@ const Profile = () => {
         <h2 className="text-center text-2xl font-semibold mb-7">
           Past Comments{" "}
         </h2>
-        <div className="space-y-4 h-200 overflow-y-auto break-words">
+        <div className="space-y-4 h-150 overflow-y-auto break-words">
+          {comments.length == 0 && (
+            <div className="text-center flex justify-center gap-1 text-xl">
+              <p>No comments yet.</p>
+              <p>You should probably change that.</p>
+            </div>
+          )}
           {comments
             .slice()
             .reverse()
