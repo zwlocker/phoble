@@ -16,18 +16,27 @@ const Navbuttons = () => {
 
   const navigate = useNavigate();
   return (
-    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
+        flexDirection: { xs: "column", md: "row" },
+        marginBottom: 4,
+      }}
+    >
       {isInfoOpen && <Info onClose={onClose} />}
       <Box
         component="img"
         src="../../../logo.png"
         height={110}
+        width={220}
         onClick={() => navigate("/")}
-        sx={{ mb: 3, cursor: "pointer" }}
+        sx={{ cursor: "pointer" }}
         className="transition hover:scale-102 hover:rotate-1 transition-transform ease-in-out"
       />
       <Timer />
-      <div className="flex gap-9 h-12 items-center mt-9">
+      <div className="flex flex-wrap gap-9 items-center mt-9">
         <button
           onClick={() => {
             setIsInfoOpen(true);

@@ -46,7 +46,7 @@ const SongPage = () => {
               component="img"
               src={song.cover}
               sx={{
-                height: 400,
+                height: { md: "400", xs: "200" },
                 mb: 4,
               }}
             />
