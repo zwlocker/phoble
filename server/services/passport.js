@@ -4,10 +4,12 @@ import dotenv from "dotenv";
 import User from "../models/user.js";
 dotenv.config();
 
+// Serialize user for session storage
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
+// Deserialize user from session
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
@@ -17,15 +19,19 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
+// Configure Google OAuth Strategy
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      // Where Google redirects after authentication
       callbackURL: "/auth/google/callback",
       scope: ["profile", "email"],
       passReqToCallback: true,
     },
+
+    // OAuth callback handler
     async (req, accessToken, refreshToken, profile, done) => {
       try {
         const existingUser = await User.findOne({ googleId: profile.id });
@@ -35,10 +41,9 @@ passport.use(
         }
 
         console.log(profile.emails);
-        // Create new user with more profile information
         const newUser = new User({
-          googleId: profile.id,
-          name: profile.displayName,
+          googleId: profile.id, // Google's unique user identifier
+          name: profile.displayName, // User's displayname from Google
           email: profile.emails[0].value,
         });
 

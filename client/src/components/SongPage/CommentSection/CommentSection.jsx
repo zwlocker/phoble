@@ -102,9 +102,7 @@ const CommentSection = ({ songId }) => {
     <div className="bg-white/8 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl h-fit mb-15">
       <div className="flex gap-2 items-center mb-6 flex-wrap">
         <CommentIcon className="w-6 h-6 text-blue-400" />
-
         <h3 className="text-2xl font-bold">Comments</h3>
-
         <StarRating rating={rating} setRating={setRating} />
         <select
           value={sortBy}

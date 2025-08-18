@@ -1,6 +1,8 @@
 import passport from "passport";
 
+// Authentication routes
 const authRoutes = (app) => {
+  // Initiate Google OAuth login
   app.get("/auth/google", (req, res) => {
     const state = req.query.returnTo;
     req.session.returnTo = state;
@@ -10,6 +12,7 @@ const authRoutes = (app) => {
     })(req, res);
   });
 
+  // Google OAuth callback handler
   app.get(
     "/auth/google/callback",
     (req, res, next) => {
@@ -31,6 +34,7 @@ const authRoutes = (app) => {
     }
   );
 
+  // Destroys authentication state and clears user session
   app.get("/api/logout", (req, res) => {
     req.logout((err) => {
       if (err) {
@@ -40,6 +44,7 @@ const authRoutes = (app) => {
     });
   });
 
+  // Get current authenticated user
   app.get("/api/current_user", (req, res) => {
     res.send(req.user);
   });

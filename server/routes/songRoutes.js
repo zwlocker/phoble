@@ -9,7 +9,9 @@ import {
   initUser,
 } from "../controllers/song.controller.js";
 
-const router = express.Router(); //create router object using Router constructor from express
+// Song API Routes
+// Handles song-related operations including comments and other user interactions
+const router = express.Router();
 
 router.get("/latest", getSong);
 router.get("/:id", getSong);

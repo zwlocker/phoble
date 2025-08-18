@@ -4,6 +4,12 @@ import { addSong } from "../services/songAdd.js";
 import mongoose from "mongoose";
 import hasProfanity from "../services/profanityFilter.js";
 
+/**
+ * Song Controllers
+ * Handles all operations for songs including comments, likes, and initializing users
+ */
+
+// Adds a new comment to a song
 export const addComment = async (req, res) => {
   try {
     const author = await User.findById(req.body.userId);
@@ -17,8 +23,6 @@ export const addComment = async (req, res) => {
     } else {
       song = await Song.findOne({ trackId: id });
     }
-
-    console.log(song);
 
     const comment = {
       _id: commentId,
@@ -43,6 +47,7 @@ export const addComment = async (req, res) => {
   }
 };
 
+// Deletes a comment made by the user who created it
 export const deleteComment = async (req, res) => {
   try {
     const id = req.params.id || "latest";
@@ -59,12 +64,14 @@ export const deleteComment = async (req, res) => {
       (comment) => comment._id.toString() === commentId
     );
 
+    // Removes from song collection
     await Song.findByIdAndUpdate(
       song._id,
       { $pull: { comments: { _id: commentId } } },
       { new: true }
     );
 
+    // Removes from user collection
     await User.findByIdAndUpdate(
       commentToDelete.createdBy,
       { $pull: { pastComments: { _id: commentId } } },
@@ -77,6 +84,7 @@ export const deleteComment = async (req, res) => {
   }
 };
 
+// Returns every song that has been stored in the database
 export const getSongs = async (req, res) => {
   try {
     const allSongs = await Song.find();
@@ -86,6 +94,7 @@ export const getSongs = async (req, res) => {
   }
 };
 
+// Returns the latest song or the song that matches the id passed in
 export const getSong = async (req, res) => {
   try {
     const id = req.params.id || "latest";
@@ -102,6 +111,7 @@ export const getSong = async (req, res) => {
   }
 };
 
+// Likes or unlikes a comment on a song
 export const toggleLike = async (req, res) => {
   try {
     const id = req.params.id;
@@ -119,22 +129,25 @@ export const toggleLike = async (req, res) => {
     }
 
     if (increment == 1) {
+      // Adds user like from comment in song collection
       await Song.findOneAndUpdate(
         { _id: song._id, "comments._id": commentId },
         { $addToSet: { "comments.$.likedBy": userId } }, //
         { new: true }
       );
-
+      // Adds user like from comment in user collection
       await User.findOneAndUpdate(
         { "pastComments._id": commentId },
         { $addToSet: { "pastComments.$.likedBy": userId } }
       );
     } else {
+      // Removes user like from comment in song collection
       await Song.findOneAndUpdate(
         { _id: song._id, "comments._id": commentId },
         { $pull: { "comments.$.likedBy": userId } }, //
         { new: true }
       );
+      // Removes user like from comment in user collection
       await User.findOneAndUpdate(
         { "pastComments._id": commentId },
         { $pull: { "pastComments.$.likedBy": userId } }
@@ -147,10 +160,12 @@ export const toggleLike = async (req, res) => {
   }
 };
 
+// Adds the newest song once daily
 export const refreshSong = async (req, res) => {
   await addSong();
 };
 
+// Initializes the display name of each user
 export const initUser = async (req, res) => {
   try {
     const userId = req.body.userId;

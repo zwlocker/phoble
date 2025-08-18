@@ -37,8 +37,7 @@ export async function getData(queryString, token, dayCounter) {
       }
 
       if (dayCounter >= 1 && dayCounter < 4) {
-        // Handles popularity gradient
-
+        // Handles popularity filtering
         if (popularity >= 90) {
           save = true;
         }

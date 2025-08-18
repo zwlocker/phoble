@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Represents individual user comments on songs
 export const comment = new mongoose.Schema(
   {
     message: {
@@ -12,10 +13,12 @@ export const comment = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // Optional star rating (0.0-5.0 scale used)
     stars: {
       type: Number,
       required: false,
     },
+    // Separated song data for faster queries
     songName: {
       type: String,
       required: true,
@@ -28,6 +31,7 @@ export const comment = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Song schema for music catalog
 const songSchema = new mongoose.Schema(
   {
     name: {
@@ -38,6 +42,7 @@ const songSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // Unique identifier from Spotify
     trackId: {
       type: String,
       required: true,
