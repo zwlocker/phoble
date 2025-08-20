@@ -21,7 +21,7 @@ const Navbuttons = () => {
         display: "flex",
         justifyContent: "space-between",
         flexWrap: "wrap",
-        flexDirection: { xs: "column", md: "row" },
+        alignItems: "center",
         marginBottom: 4,
       }}
     >
