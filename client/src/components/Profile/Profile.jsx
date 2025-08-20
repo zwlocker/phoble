@@ -6,6 +6,15 @@ import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
+/*
+This is the Profile component. It can be accessed in the Navbar, and provides the user with
+information about their Google profile and comment history when signed in, including
+how long they've been a member of Phoble, their username, and their email.
+
+This component calls the useAuth function in order to ensure that the user is signed in,
+and to access the user's past comments.
+*/
+
 const Profile = () => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
   if (!user) {

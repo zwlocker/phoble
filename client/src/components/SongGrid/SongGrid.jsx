@@ -6,6 +6,16 @@ import { getSongs } from "../../api";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 
+/*
+This is the SongGrid component. It determines the layout of the Past Songs page, which can be accessed
+through the Navbar. Each song card shows the date the song was added, the album cover for the song, the song name,
+and the artist name. Clicking on a song card takes the user to the SongPage component for that song.
+
+This component calls the getSongs function in order to retrieve all songs from the database so that each song can 
+be displayed in the grid, as well as the useNavigate function in order to navigate to a new page when clicking on
+a song card.
+*/
+
 const SongGrid = () => {
   const [songs, setSongs] = useState([]);
 
