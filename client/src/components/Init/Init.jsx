@@ -31,7 +31,7 @@ const Init = () => {
   const handleSubmit = async () => {
     const result = await initUser(user._id, username);
     if (result.success) {
-      location.href = "https://www.phoble.net/";
+      location.href = "http://localhost:5173";
     } else {
       toast.clearWaitingQueue();
       toast.error(result.error, {

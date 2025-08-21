@@ -23,15 +23,14 @@ const authRoutes = (app) => {
     passport.authenticate("google"),
     (req, res) => {
       const returnTo = req.returnTo
-        ? "https://vercel.com/zach-lockers-projects/phoble/FuAMsBxGduD51zFipFAVFZy8V1Me" +
-          decodeURIComponent(req.returnTo)
-        : "https://vercel.com/zach-lockers-projects/phoble/FuAMsBxGduD51zFipFAVFZy8V1Me";
+        ? "http://localhost:5173" + decodeURIComponent(req.returnTo)
+        : "http://localhost:5173";
 
       delete req.session.returnTo;
 
       req.user.username
         ? res.redirect(returnTo)
-        : res.redirect("https://www.phoble.net//initUser");
+        : res.redirect("http://localhost:5173/initUser");
     }
   );
 

@@ -14,8 +14,7 @@ export const useAuth = () => {
   return context;
 };
 
-const API_BASE_URL =
-  "https://vercel.com/zach-lockers-projects/phoble/FuAMsBxGduD51zFipFAVFZy8V1Me";
+const API_BASE_URL = "http://localhost:5100";
 
 // Wraps app to provide authentication state and methods to child components
 export const AuthProvider = ({ children }) => {

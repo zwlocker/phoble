@@ -16,7 +16,7 @@ async function main() {
   const app = express();
   app.use(
     cors({
-      origin: "https://www.phoble.net/",
+      origin: "http://localhost:5173",
       credentials: true,
     })
   );

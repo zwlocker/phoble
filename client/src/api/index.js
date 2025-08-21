@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const url =
-  "https://vercel.com/zach-lockers-projects/phoble/FuAMsBxGduD51zFipFAVFZy8V1Me/api/songs";
+const url = "http://localhost:5100/api/songs";
 
 export const getSong = async (songId = "latest") => {
   const res = await axios.get(`${url}/${songId}`);
