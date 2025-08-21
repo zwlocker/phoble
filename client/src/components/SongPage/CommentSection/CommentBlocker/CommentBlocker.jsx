@@ -1,7 +1,8 @@
 import React from "react";
 /*
-This is the CommentBlocker component, which only renders if the user hasn't signed in
-*/
+ * This is the CommentBlocker component, which only renders if the user hasn't signed in.
+ * This component is rendered where comments otherwise would appear for a signed in user.
+ */
 
 const CommentBlocker = () => {
   return (

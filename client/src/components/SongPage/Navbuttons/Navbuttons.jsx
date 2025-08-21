@@ -7,6 +7,10 @@ import Timer from "./Timer/Timer";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import Info from "../../Info/Info";
 
+/*
+ * This is the Navbuttons component, which displays the Phoble logo, the countdown
+ * for the next song, and the AuthButton component.
+ */
 const Navbuttons = () => {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
 
@@ -31,6 +35,7 @@ const Navbuttons = () => {
         src="../../../logo.png"
         height={110}
         width={220}
+        minWidth={220}
         onClick={() => navigate("/")}
         sx={{ cursor: "pointer" }}
         className="transition hover:scale-102 hover:rotate-1 transition-transform ease-in-out"

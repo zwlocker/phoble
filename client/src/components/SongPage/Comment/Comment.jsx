@@ -10,14 +10,14 @@ import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 
 /*
-This is the Comment component. It determines the layout of a comment in the CommentSection component, including the 
-name of the user which created the comment, the comment, time elapsed since the comment was posted, the like button,
-and the delete button, which only renders if the current user posted the comment.
-
-When the user toggles the like button, it passes this action to the backend to update the like count for the comment.
-The props drilled into this component include the comment, the songId for the song which the comment is on, and 
-the onDelete method in order to process the user deleting a comment.
-*/
+ * This is the Comment component. It determines the layout of a comment in the CommentSection component, including the
+ * name of the user which created the comment, the comment, time elapsed since the comment was posted, the like button,
+ * and the delete button, which only renders if the current user posted the comment.
+ *
+ * When the user toggles the like button, it passes this action to the backend to update the like count for the comment.
+ * The props drilled into this component include the comment, the songId for the song which the comment is on, and
+ * the onDelete method in order to process the user deleting a comment.
+ */
 
 const Comment = ({ comment, onDelete, songId }) => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();

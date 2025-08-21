@@ -7,6 +7,10 @@ import { initUser } from "../../api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+/*
+ * This is the Init component, which appears for users signing in for the first time.
+ * Here, users can create a username to be displayed on their profile and in their comments.
+ */
 const Init = () => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
   const [username, setUsername] = useState("");

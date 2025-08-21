@@ -1,5 +1,9 @@
 import React from "react";
 
+/*
+ * This is the Player component, which returns an iframe of the song
+ * that matches the passed id.
+ */
 const Player = ({ id }) => {
   return (
     <iframe

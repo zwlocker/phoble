@@ -11,6 +11,10 @@ import CommentBlocker from "./CommentBlocker/CommentBlocker";
 import { toast } from "react-toastify";
 import StarRating from "./StarRating/StarRating";
 
+/*
+ * This is the CommentSection component. Here, users can rate songs, comment on songs, as well as
+ * view comments made by others.
+ */
 const CommentSection = ({ songId }) => {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
 
@@ -116,7 +120,10 @@ const CommentSection = ({ songId }) => {
       </div>
       <div className="mb-6">
         <div className="flex gap-3">
-          <Box className="w-full" sx={{ display: "flex", gap: 2, my: 2 }}>
+          <Box
+            className="w-full"
+            sx={{ display: "flex", flexWrap: "wrap", gap: 2, my: 2 }}
+          >
             {isAuthenticated ? (
               <>
                 <input

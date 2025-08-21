@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { getSong } from "../../../../api";
 import { refreshSong } from "../../../../api";
 
+/*
+ * This is the Timer component. It displays an active counter in the Navbuttons component
+ * which counts down until a new song is retrieved.
+ */
 const Timer = () => {
   const [song, setSong] = useState(null);
   const [countdown, setCountdown] = useState(null);

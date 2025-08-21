@@ -8,6 +8,11 @@ import CommentIcon from "@mui/icons-material/Comment";
 import Navbuttons from "./Navbuttons/Navbuttons";
 import { useParams } from "react-router-dom";
 
+/*
+ * This is the SongPage component, which is responsible for displaying song data
+ * including the cover, artist, and title of each song. There is a unique SongPage
+ * for every song that Phoble has displayed.
+ */
 const SongPage = () => {
   const [song, setSong] = useState(null);
   const { id } = useParams();

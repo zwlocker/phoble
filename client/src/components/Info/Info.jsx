@@ -1,5 +1,8 @@
 import React from "react";
 
+/*
+ * This is the Info component, designed to help users understand how Phoble works.
+ */
 const Info = ({ onClose }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {

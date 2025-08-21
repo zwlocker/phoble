@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+/*
+ * This is the AuthButton component. If the user is not signed in, this button
+ * directs them to sign in with Google OAuth. Otherwise, it reveals a menu where
+ * users can either logout or view their profile.
+ */
 const AuthButton = () => {
   const navigate = useNavigate();
 
