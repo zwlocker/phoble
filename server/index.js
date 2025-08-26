@@ -48,7 +48,7 @@ async function main() {
 
   // API routes for song operations
   app.use("/api/songs", songRouter);
-  console.log("About to start server...");
+  console.log("About to start server on port", process.env.PORT);
 
   app.listen(process.env.PORT);
 }
