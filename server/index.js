@@ -49,8 +49,28 @@ async function main() {
 
   // API routes for song operations
   app.use("/api/songs", songRouter);
+
+  function printRoutes(app) {
+    console.log("\n--- Registered Routes ---");
+    app._router.stack.forEach((middleware) => {
+      if (middleware.route) {
+        console.log(
+          `${Object.keys(middleware.route.methods)} ${middleware.route.path}`
+        );
+      } else if (middleware.name === "router") {
+        middleware.handle.stack.forEach((handler) => {
+          const route = handler.route;
+          if (route) {
+            console.log(`${Object.keys(route.methods)} ${route.path}`);
+          }
+        });
+      }
+    });
+    console.log("--- End Routes ---\n");
+  }
+
+  printRoutes(app);
   app.listen(process.env.PORT);
-  console.log("i am listening");
 }
 
 main();
