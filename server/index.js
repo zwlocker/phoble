@@ -36,10 +36,11 @@ async function main() {
 
   app.use(
     cors({
-      origin: true,
+      origin: ["https://www.phoble.net", "https://phoble.net"],
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
+      sameSite: "none",
     })
   );
   console.log("✅ CORS configured");
@@ -76,7 +77,6 @@ async function main() {
     console.log("🎉 SERVER SUCCESSFULLY STARTED!");
     console.log("📡 Server is listening on port:", PORT);
     console.log("🌍 Server is accessible from all interfaces (0.0.0.0)");
-    console.log("=" * 50);
   });
 }
 
