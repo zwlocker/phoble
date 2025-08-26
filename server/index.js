@@ -17,7 +17,7 @@ async function main() {
 
   app.use(
     cors({
-      origin: "*", // https://www.phoble.net
+      origin: "https://www.phoble.net",
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
@@ -35,7 +35,7 @@ async function main() {
       cookie: {
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         secure: true, // Set to true in production with HTTPS
-        sameSite: "lax",
+        sameSite: "none",
       },
     })
   );
