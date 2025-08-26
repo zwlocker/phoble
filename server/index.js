@@ -15,7 +15,6 @@ async function main() {
   connectDB();
   const app = express();
 
-  console.log("before cors");
   app.use(
     cors({
       origin: "https://www.phoble.net",
@@ -24,10 +23,6 @@ async function main() {
       allowedHeaders: ["Content-Type", "Authorization"],
     })
   );
-
-  console.log("after cors");
-  app.options("*", cors());
-  console.log("after options");
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
