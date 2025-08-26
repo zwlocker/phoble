@@ -23,14 +23,14 @@ const authRoutes = (app) => {
     passport.authenticate("google"),
     (req, res) => {
       const returnTo = req.returnTo
-        ? "http://localhost:5173" + decodeURIComponent(req.returnTo)
-        : "http://localhost:5173";
+        ? "https://phoble.net" + decodeURIComponent(req.returnTo)
+        : "https://phoble.net";
 
       delete req.session.returnTo;
 
       req.user.username
         ? res.redirect(returnTo)
-        : res.redirect("http://localhost:5173/initUser");
+        : res.redirect("https://phoble.net/initUser");
     }
   );
 
