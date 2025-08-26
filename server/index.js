@@ -12,7 +12,7 @@ dotenv.config();
 // Main server initialization function
 // Sets up Express server with middleware, authentication, and routes
 async function main() {
-  connectDB();
+  await onnectDB();
   const app = express();
 
   app.use(
