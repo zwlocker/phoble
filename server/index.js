@@ -5,7 +5,7 @@ import express from "express";
 import cors from "cors";
 import passport from "./services/passport.js";
 import authRoutes from "./routes/authRoutes.js";
-import session from "express-session";
+import session from "cookie-session";
 
 dotenv.config();
 
