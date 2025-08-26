@@ -47,6 +47,9 @@ async function main() {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+
+  app.get("/health", (req, res) => res.send("OK"));
+
   // Session configuration to handle authentication persistance
   app.use(
     session({
