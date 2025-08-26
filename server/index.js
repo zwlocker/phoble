@@ -16,7 +16,7 @@ async function main() {
   const app = express();
   app.use(
     cors({
-      origin: "https://phoble.net",
+      origin: "https://www.phoble.net",
       credentials: true,
     })
   );
