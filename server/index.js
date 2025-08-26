@@ -14,6 +14,8 @@ dotenv.config();
 async function main() {
   connectDB();
   const app = express();
+
+  console.log("before cors");
   app.use(
     cors({
       origin: "https://www.phoble.net",
@@ -23,7 +25,9 @@ async function main() {
     })
   );
 
+  console.log("after cors");
   app.options("*", cors());
+  console.log("after options");
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -50,26 +54,6 @@ async function main() {
   // API routes for song operations
   app.use("/api/songs", songRouter);
 
-  function printRoutes(app) {
-    console.log("\n--- Registered Routes ---");
-    app._router.stack.forEach((middleware) => {
-      if (middleware.route) {
-        console.log(
-          `${Object.keys(middleware.route.methods)} ${middleware.route.path}`
-        );
-      } else if (middleware.name === "router") {
-        middleware.handle.stack.forEach((handler) => {
-          const route = handler.route;
-          if (route) {
-            console.log(`${Object.keys(route.methods)} ${route.path}`);
-          }
-        });
-      }
-    });
-    console.log("--- End Routes ---\n");
-  }
-
-  printRoutes(app);
   app.listen(process.env.PORT);
 }
 
