@@ -44,7 +44,7 @@ async function main() {
 
   // API routes for song operations
   app.use("/api/songs", songRouter);
-  app.listen(5100);
+  app.listen(process.env.PORT);
 }
 
 main();
