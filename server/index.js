@@ -18,6 +18,7 @@ async function main() {
     cors({
       origin: "https://www.phoble.net",
       credentials: true,
+      allowedHeaders: ["Content-Type", "Authorization"],
     })
   );
   app.use(express.json());
