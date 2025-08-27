@@ -6,6 +6,7 @@ import cors from "cors";
 import passport from "./services/passport.js";
 import authRoutes from "./routes/authRoutes.js";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 
 dotenv.config();
 console.log("✅ Environment variables loaded");
@@ -59,6 +60,11 @@ async function main() {
         secure: true, // Set to true in production with HTTPS
         sameSite: "lax",
       },
+      store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI,
+        touchAfter: 24 * 3600,
+        ttl: 30 * 24 * 60 * 60,
+      }),
     })
   );
 
