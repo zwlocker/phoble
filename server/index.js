@@ -37,7 +37,7 @@ async function main() {
 
   app.use(
     cors({
-      origin: ["https://www.phoble.net", "https://phoble.net"],
+      origin: true, //["https://www.phoble.net", "https://phoble.net"]
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
