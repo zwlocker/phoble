@@ -97,7 +97,6 @@ export const getSongs = async (req, res) => {
 // Returns the latest song or the song that matches the id passed in
 export const getSong = async (req, res) => {
   try {
-    console.log("made it to get song controller");
     const id = req.params.id || "latest";
     let song;
 
