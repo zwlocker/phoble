@@ -58,7 +58,7 @@ async function main() {
       cookie: {
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         secure: true, // Set to true in production with HTTPS
-        sameSite: "lax",
+        sameSite: "none",
       },
       store: MongoStore.create({
         mongoUrl: process.env.MONGO_URI,
