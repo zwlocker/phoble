@@ -22,6 +22,9 @@ const authRoutes = (app) => {
     },
     passport.authenticate("google"),
     (req, res) => {
+      console.log("User after auth:", req.user);
+      console.log("Session ID:", req.sessionID);
+      console.log("Session data:", req.session);
       const returnTo = req.returnTo
         ? "https://www.phoble.net" + decodeURIComponent(req.returnTo)
         : "https://www.phoble.net";

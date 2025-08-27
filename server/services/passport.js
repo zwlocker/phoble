@@ -26,8 +26,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       // Where Google redirects after authentication
-      callbackURL:
-        "https://phoble-production.up.railway.app/auth/google/callback",
+      callbackURL: "/auth/google/callback",
       scope: ["profile", "email"],
       passReqToCallback: true,
     },
