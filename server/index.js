@@ -5,7 +5,7 @@ import express from "express";
 import cors from "cors";
 import passport from "./services/passport.js";
 import authRoutes from "./routes/authRoutes.js";
-import session from "cookie-session";
+import session from "express-session";
 
 dotenv.config();
 console.log("✅ Environment variables loaded");
@@ -47,8 +47,6 @@ async function main() {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-
-  app.get("/health", (req, res) => res.send("OK"));
 
   // Session configuration to handle authentication persistance
   app.use(
