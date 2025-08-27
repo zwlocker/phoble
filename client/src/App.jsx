@@ -15,7 +15,7 @@ const App = () => {
           <Route path="/" element={<SongPage />} />
           <Route path="/song/:id" element={<SongPage />} />
           <Route path="/history" element={<SongGrid />} />
-          <Route path="/inituser" element={<Init />} />
+          <Route path="/initUser" element={<Init />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
         <ToastContainer
