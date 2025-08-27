@@ -11,6 +11,10 @@ const AuthButton = () => {
   const navigate = useNavigate();
 
   const { user, isAuthenticated, login, logout, loading } = useAuth();
+
+  console.log(user);
+  console.log(isAuthenticated);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   if (isAuthenticated && !user.username) {
