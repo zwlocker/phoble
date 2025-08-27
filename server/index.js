@@ -35,6 +35,8 @@ async function main() {
 
   console.log("🌐 Setting up CORS...");
 
+  app.set("trust proxy", 1); // trust first proxy
+
   app.use(
     cors({
       origin: ["https://www.phoble.net", "https://phoble.net"],
