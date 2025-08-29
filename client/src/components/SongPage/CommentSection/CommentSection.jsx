@@ -58,20 +58,16 @@ const CommentSection = ({ songId }) => {
     };
 
     fetchComments();
+  }, [songId]);
 
-    const checkForComment = () => {
-      for (let i = 0; i < comments.length; i++) {
-        if (comments[i].createdBy == user._id) {
-          setHasCommented(true);
-          return;
-        }
-      }
-    };
+  useEffect(() => {
+    if (!isAuthenticated || !user) return;
 
-    if (isAuthenticated) {
-      checkForComment();
-    }
-  }, [songId, isAuthenticated]);
+    const alreadyCommented = comments.some(
+      (comment) => comment.createdBy === user._id
+    );
+    setHasCommented(alreadyCommented);
+  }, [comments, isAuthenticated, user]);
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
