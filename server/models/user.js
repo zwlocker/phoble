@@ -26,6 +26,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: false,
       maxlength: 25,
+      default: null, // <-- ensure it starts as null
+      unique: true, // <-- enforce uniqueness
+      sparse: true, // <-- allow multiple nulls
     },
 
     // Email from Google OAuth
