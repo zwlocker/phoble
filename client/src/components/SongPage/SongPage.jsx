@@ -15,21 +15,27 @@ import { useParams } from "react-router-dom";
  */
 const SongPage = () => {
   const [song, setSong] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
     const fetchSong = async () => {
+      if (loading) return; // Prevent duplicate calls
+
       try {
+        setLoading(true);
         const songId = id || "latest";
         const data = await getSong(songId);
 
         setSong(data);
       } catch (error) {
         console.error("Error fetching song:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchSong();
-  }, [id]);
+  }, [id, loading]);
 
   if (!song) return null;
 
