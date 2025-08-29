@@ -57,12 +57,11 @@ async function main() {
       secret: process.env.COOKIE_KEY,
       resave: false,
       saveUninitialized: false,
+      name: "phoble-session",
       cookie: {
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         secure: true, // Set to true in production with HTTPS
         sameSite: "none",
-        httpOnly: true, // Add this for security
-        domain: ".phoble.net", // Explicit domain
       },
       store: MongoStore.create({
         mongoUrl: process.env.MONGO_URI,
