@@ -86,6 +86,7 @@ const CommentSection = ({ songId }) => {
     setComments((prev) => [...prev, res]);
     setMessage("");
     setRating(0);
+    setHasCommented(true);
     toast.clearWaitingQueue();
     toast.success("Comment added successfully", {
       className:
