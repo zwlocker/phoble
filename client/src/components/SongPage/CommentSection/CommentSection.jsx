@@ -71,7 +71,7 @@ const CommentSection = ({ songId }) => {
     if (isAuthenticated) {
       checkForComment();
     }
-  }, [songId]);
+  }, [songId, isAuthenticated]);
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
