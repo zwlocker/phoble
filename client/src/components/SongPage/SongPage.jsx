@@ -35,7 +35,7 @@ const SongPage = () => {
       }
     };
     fetchSong();
-  }, [id, loading]);
+  }, [id]);
 
   if (!song) return null;
 
