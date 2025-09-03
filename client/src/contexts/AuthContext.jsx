@@ -14,7 +14,7 @@ export const useAuth = () => {
   return context;
 };
 
-const API_BASE_URL = "https://phoble-production.up.railway.app";
+const API_BASE_URL = "https://api.phoble.net";
 
 // Wraps app to provide authentication state and methods to child components
 export const AuthProvider = ({ children }) => {

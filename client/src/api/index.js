@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://phoble-production.up.railway.app/api/songs";
+const url = "https://api.phoble.net/api/songs";
 
 export const getSong = async (songId = "latest") => {
   const res = await axios.get(`${url}/${songId}`);
