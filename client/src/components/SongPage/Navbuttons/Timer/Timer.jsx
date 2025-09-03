@@ -45,14 +45,10 @@ const Timer = () => {
   }, [song]);
 
   useEffect(() => {
-    if (countdown < 1) {
+    if (countdown == 0) {
       const refresh = async () => {
         console.log("Timer is 0");
         await refreshSong();
-
-        // then fetch the new song to reset countdown
-        const data = await getSong("latest");
-        setSong(data);
       };
       refresh();
     }
