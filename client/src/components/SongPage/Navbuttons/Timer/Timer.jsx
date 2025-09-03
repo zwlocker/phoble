@@ -48,7 +48,13 @@ const Timer = () => {
     if (countdown == 0) {
       const refresh = async () => {
         console.log("Timer is 0");
-        await refreshSong();
+        try {
+          await refreshSong();
+        } catch (error) {
+          console.error("Error refreshing song:", error);
+        } finally {
+          window.location.reload();
+        }
       };
       refresh();
     }
