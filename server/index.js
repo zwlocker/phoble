@@ -63,7 +63,6 @@ async function main() {
         secure: process.env.NODE_ENV === "production", // Only secure in production
         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // More permissive for mobile
         httpOnly: true, // Prevent XSS attacks
-        domain: ".phoble.net",
       },
       store: MongoStore.create({
         mongoUrl: process.env.MONGO_URI,
