@@ -7,7 +7,7 @@ import passport from "./services/passport.js";
 import authRoutes from "./routes/authRoutes.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import { addSong } from "../services/songAdd.js";
+import { addSong } from "./services/songAdd.js";
 
 dotenv.config();
 
