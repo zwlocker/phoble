@@ -13,7 +13,7 @@ const Timer = () => {
       const currentTime = new Date();
 
       const nextMidnight = new Date(currentTime);
-      nextMidnight.setHours(19, 0, 0, 0);
+      nextMidnight.setUTCHours(24, 0, 0, 0);
 
       const timeUntilMidnight = Math.floor((nextMidnight - currentTime) / 1000);
       setCountdown(timeUntilMidnight);

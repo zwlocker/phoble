@@ -8,6 +8,7 @@ import authRoutes from "./routes/authRoutes.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import { addSong } from "./services/songAdd.js";
+import cron from "node-cron";
 
 dotenv.config();
 
@@ -68,6 +69,14 @@ async function main() {
 
   // API routes for song operations
   app.use("/api/songs", songRouter);
+
+  cron.schedule("0 0 * * *", async () => {
+    try {
+      await addSong();
+    } catch (error) {
+      console.error("Error during song refresh:", error);
+    }
+  });
 
   const PORT = process.env.PORT || 3000;
   console.log("🚀 About to start server on port:", PORT);
