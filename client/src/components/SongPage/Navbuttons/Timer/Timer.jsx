@@ -1,64 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { getSong } from "../../../../api";
-import { refreshSong } from "../../../../api";
 
 /*
  * This is the Timer component. It displays an active counter in the Navbuttons component
  * which counts down until a new song is retrieved.
  */
 const Timer = () => {
-  const [song, setSong] = useState(null);
-  const [countdown, setCountdown] = useState(null);
+  const [countdown, setCountdown] = useState(0);
 
   useEffect(() => {
-    const fetchSong = async () => {
-      try {
-        const songId = "latest";
-        const data = await getSong(songId);
-
-        setSong(data);
-      } catch (error) {
-        console.error("Error fetching song:", error);
-      }
-    };
-    fetchSong();
-  }, []);
-
-  useEffect(() => {
-    if (!song?.createdAt) return;
-
     const updateCountdown = () => {
-      const now = new Date();
-      let latestSongDate = new Date(song.createdAt);
-      const timeSinceLastSong = now - latestSongDate;
+      const currentTime = new Date();
 
-      let timeUntilNext = 86400000 - (timeSinceLastSong % 86400000);
-      setCountdown(Math.floor(timeUntilNext / 1000)); //converts to seconds
+      const nextMidnight = new Date(now);
+      nextMidnight.setHours(24, 0, 0, 0);
+
+      const timeUntilMidnight = Math.floor((nextMidnight - currentTime) / 1000);
+      setCountdown(timeUntilMidnight);
     };
 
     updateCountdown();
 
+    // Update every second
     const interval = setInterval(updateCountdown, 1000);
 
-    const cleanup = () => clearInterval(interval);
-    return cleanup;
-  }, [song]);
-
-  useEffect(() => {
-    if (countdown == 0) {
-      const refresh = async () => {
-        console.log("Timer is 0");
-        try {
-          await refreshSong();
-        } catch (error) {
-          console.error("Error refreshing song:", error);
-        } finally {
-          window.location.reload();
-        }
-      };
-      refresh();
-    }
-  }, [countdown]);
+    return () => clearInterval(interval);
+  }, []);
 
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);

@@ -7,21 +7,9 @@ import passport from "./services/passport.js";
 import authRoutes from "./routes/authRoutes.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import { addSong } from "../services/songAdd.js";
 
 dotenv.config();
-console.log("✅ Environment variables loaded");
-console.log("📍 NODE_ENV:", process.env.NODE_ENV || "not set");
-console.log("🔌 PORT:", process.env.PORT || "not set");
-console.log("🍃 MONGO_URI:", process.env.MONGO_URI ? "✅ Set" : "❌ Missing");
-console.log("🔑 COOKIE_KEY:", process.env.COOKIE_KEY ? "✅ Set" : "❌ Missing");
-console.log(
-  "🔐 GOOGLE_CLIENT_ID:",
-  process.env.GOOGLE_CLIENT_ID ? "✅ Set" : "❌ Missing"
-);
-console.log(
-  "🔐 GOOGLE_CLIENT_SECRET:",
-  process.env.GOOGLE_CLIENT_SECRET ? "✅ Set" : "❌ Missing"
-);
 
 // Main server initialization function
 // Sets up Express server with middleware, authentication, and routes

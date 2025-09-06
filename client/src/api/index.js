@@ -47,11 +47,6 @@ export const toggleLike = async (
   return res.data;
 };
 
-export const refreshSong = async () => {
-  const res = await axios.post(`${url}/refresh`);
-  return res.data;
-};
-
 export const initUser = async (userId, username) => {
   try {
     const res = await axios.post(`${url}/initUser`, {

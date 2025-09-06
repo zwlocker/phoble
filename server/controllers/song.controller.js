@@ -1,6 +1,5 @@
 import Song from "../models/song.js";
 import User from "../models/user.js";
-import { addSong } from "../services/songAdd.js";
 import mongoose from "mongoose";
 import hasProfanity from "../services/profanityFilter.js";
 
@@ -158,11 +157,6 @@ export const toggleLike = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-};
-
-// Adds the newest song once daily
-export const refreshSong = async (req, res) => {
-  await addSong();
 };
 
 // Initializes the display name of each user
