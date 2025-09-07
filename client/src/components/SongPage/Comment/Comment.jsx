@@ -55,7 +55,12 @@ const Comment = ({ comment, onDelete, songId }) => {
 
   const renderStars = (rating) => {
     return Array.from({ length: Math.floor(rating) }, (_, index) => (
-      <StarIcon key={index} className="text-amber-400" fontSize="small" />
+      <StarIcon
+        key={index}
+        className="text-amber-400"
+        fontSize="small"
+        sx={{ fontSize: { xs: "12px", sm: "16px" } }}
+      />
     ));
   };
 
@@ -90,7 +95,11 @@ const Comment = ({ comment, onDelete, songId }) => {
               <span className="text-xs">
                 {renderStars(comment.stars)}
                 {comment.stars % 1 !== 0 && (
-                  <StarHalfIcon className="text-amber-400" fontSize="small" />
+                  <StarHalfIcon
+                    className="text-amber-400"
+                    fontSize="small"
+                    sx={{ fontSize: { xs: "12px", sm: "16px" } }}
+                  />
                 )}
               </span>
             )}
@@ -107,7 +116,7 @@ const Comment = ({ comment, onDelete, songId }) => {
             {user._id === comment.createdBy && (
               <button
                 onClick={() => handleDeleteComment(comment._id)}
-                className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-red-400 hover:text-red-300 p-1"
+                className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 group-hover:opacity-100 transition-opacity duration-200 text-red-400 hover:text-red-300 p-1"
               >
                 <DeleteIcon className="w-4 h-4" />
               </button>
