@@ -12,6 +12,27 @@ import cron from "node-cron";
 
 dotenv.config();
 
+async function fixIndexOneTime() {
+  try {
+    const User = (await import("./models/user.js")).default;
+
+    await User.collection.dropIndex("username_1");
+
+    // Create the correct sparse index
+    await User.collection.createIndex(
+      { username: 1 },
+      { unique: true, sparse: true }
+    );
+    console.log("✅ Created correct sparse username index");
+
+    // Show current indexes
+    const indexes = await User.collection.getIndexes();
+    console.log("📋 Current indexes:", indexes);
+  } catch (error) {
+    console.error("❌ Error fixing index:", error);
+  }
+}
+
 // Main server initialization function
 // Sets up Express server with middleware, authentication, and routes
 async function main() {
@@ -19,6 +40,8 @@ async function main() {
 
   await connectDB();
   console.log("✅ Database connected successfully");
+
+  await fixIndexOneTime();
 
   const app = express();
 
