@@ -15,24 +15,21 @@ const authRoutes = (app) => {
   // Google OAuth callback handler
   app.get(
     "/auth/google/callback",
-    (req, res, next) => {
-      const returnTo = req.query.state || req.session.returnTo;
-      req.returnTo = returnTo;
-      next();
-    },
     passport.authenticate("google"),
     (req, res) => {
       console.log("User after auth:", req.user);
       console.log("Session ID:", req.sessionID);
       console.log("Session data:", req.session);
-      const returnTo = req.returnTo
-        ? "https://www.phoble.net" + decodeURIComponent(req.returnTo)
+
+      const returnTo = req.query.state || req.session.returnTo;
+      const redirectUrl = returnTo
+        ? "https://www.phoble.net" + decodeURIComponent(returnTo)
         : "https://www.phoble.net";
 
       delete req.session.returnTo;
 
       req.user.username
-        ? res.redirect(returnTo)
+        ? res.redirect(redirectUrl)
         : res.redirect("https://www.phoble.net/initUser");
     }
   );
