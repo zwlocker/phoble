@@ -53,6 +53,11 @@ export async function getData(queryString, token, dayCounter) {
         }
       }
 
+      if (artist == "HUNTR/X") {
+        // Explicitly prevent multiple KPOP Demon Hunter songs
+        save = false;
+      }
+
       if (save && !exists) {
         const song = new Song({
           // Constructs Song model to save
