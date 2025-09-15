@@ -24,7 +24,7 @@ async function main() {
 
   console.log("🌐 Setting up CORS...");
 
-  app.set("trust proxy", 1); // trust first proxy
+  app.set("trust proxy", 1); // Trust first proxy
 
   app.use(
     cors({
@@ -86,6 +86,7 @@ async function main() {
     console.log("📡 Server is listening on port:", PORT);
     console.log("🌍 Server is accessible from all interfaces (0.0.0.0)");
   });
+  await addSong(); // temporary
 }
 
 main();
