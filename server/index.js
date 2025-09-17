@@ -15,14 +15,10 @@ dotenv.config();
 // Main server initialization function
 // Sets up Express server with middleware, authentication, and routes
 async function main() {
-  console.log("🔄 Attempting database connection...");
-
   await connectDB();
-  console.log("✅ Database connected successfully");
+  console.log("Database connected successfully");
 
   const app = express();
-
-  console.log("🌐 Setting up CORS...");
 
   app.set("trust proxy", 1); // Trust first proxy
 
@@ -35,7 +31,6 @@ async function main() {
       sameSite: "none",
     })
   );
-  console.log("✅ CORS configured");
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -70,6 +65,8 @@ async function main() {
   // API routes for song operations
   app.use("/api/songs", songRouter);
 
+  process.env.TZ = "UTC";
+
   cron.schedule("0 0 * * *", async () => {
     try {
       await addSong();
@@ -77,14 +74,13 @@ async function main() {
       console.error("Error during song refresh:", error);
     }
   });
+  await addSong();
 
   const PORT = process.env.PORT || 3000;
   console.log("🚀 About to start server on port:", PORT);
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log("🎉 SERVER SUCCESSFULLY STARTED!");
-    console.log("📡 Server is listening on port:", PORT);
-    console.log("🌍 Server is accessible from all interfaces (0.0.0.0)");
+    console.log("Server is listening on port:", PORT);
   });
 }
 
