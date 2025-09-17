@@ -74,7 +74,6 @@ async function main() {
       console.error("Error during song refresh:", error);
     }
   });
-  await addSong();
 
   const PORT = process.env.PORT || 3000;
   console.log("🚀 About to start server on port:", PORT);
