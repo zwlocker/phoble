@@ -32,7 +32,7 @@ const SongGrid = () => {
     <Container maxWidth="lg" sx={{ mt: 4 }} className="mb-10">
       <Navbuttons />
       <Grid container spacing={5} sx={{ textAlign: "center" }}>
-        {songs.toReversed().map((song, index) => (
+        {songs.map((song, index) => (
           <Grid
             size={{ sm: 6, md: 4, xs: 12 }}
             key={song._id}

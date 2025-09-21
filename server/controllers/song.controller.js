@@ -86,7 +86,7 @@ export const deleteComment = async (req, res) => {
 // Returns every song that has been stored in the database
 export const getSongs = async (req, res) => {
   try {
-    const allSongs = await Song.find();
+    const allSongs = await Song.find().sort({ createdAt: -1 });
     res.send(allSongs);
   } catch (error) {
     console.log(error);
