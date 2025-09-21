@@ -17,7 +17,7 @@ export async function addSong() {
   const id = process.env.CLIENT_ID;
   const secret = process.env.CLIENT_SECRET;
   const token = await getAccessToken(id, secret);
-  const uri = await getURI(day);
+  const uri = await getURI(day + 1);
 
-  await getData(uri, token, day);
+  await getData(uri, token, day + 1);
 }

@@ -75,6 +75,8 @@ async function main() {
     }
   });
 
+  await addSong();
+
   const PORT = process.env.PORT || 3000;
   console.log("🚀 About to start server on port:", PORT);
 
