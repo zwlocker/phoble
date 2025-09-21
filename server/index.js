@@ -65,20 +65,21 @@ async function main() {
   // API routes for song operations
   app.use("/api/songs", songRouter);
 
-  process.env.TZ = "UTC";
-
-  cron.schedule("0 0 * * *", async () => {
-    try {
-      await addSong();
-    } catch (error) {
-      console.error("Error during song refresh:", error);
+  cron.schedule(
+    "0 0 * * *",
+    async () => {
+      try {
+        await addSong();
+      } catch (error) {
+        console.error("Error during song refresh:", error);
+      }
+    },
+    {
+      timezone: "America/New_York",
     }
-  });
-
-  await addSong(); // temp
+  );
 
   const PORT = process.env.PORT || 3000;
-  console.log("🚀 About to start server on port:", PORT);
 
   app.listen(PORT, "0.0.0.0", () => {
     console.log("Server is listening on port:", PORT);

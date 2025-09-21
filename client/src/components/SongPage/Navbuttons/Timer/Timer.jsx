@@ -10,12 +10,19 @@ const Timer = () => {
 
   useEffect(() => {
     const updateCountdown = () => {
-      const currentTime = new Date();
+      const now = new Date();
 
-      const nextMidnight = new Date(currentTime);
-      nextMidnight.setUTCHours(24, 0, 0, 0);
+      const estNow = new Date(
+        now.toLocaleString("en-US", { timeZone: "America/New_York" })
+      );
 
-      const timeUntilMidnight = Math.floor((nextMidnight - currentTime) / 1000);
+      const estMidnight = new Date(estNow);
+      estMidnight.setDate(estMidnight.getDate() + 1);
+      estMidnight.setHours(0, 0, 0, 0);
+
+      const diffMs = estMidnight - estNow;
+      const timeUntilMidnight = Math.floor(diffMs / 1000);
+
       setCountdown(timeUntilMidnight);
     };
 
