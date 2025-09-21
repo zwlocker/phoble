@@ -13,7 +13,7 @@ import { getAccessToken } from "./spotifyAuth.js";
 export async function addSong() {
   const d = new Date();
   let day = d.getDay();
-
+  day++;
   const id = process.env.CLIENT_ID;
   const secret = process.env.CLIENT_SECRET;
   const token = await getAccessToken(id, secret);
