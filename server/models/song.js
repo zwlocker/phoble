@@ -59,4 +59,6 @@ const songSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+songSchema.index({ trackId: 1 });
+
 export default mongoose.model("Song", songSchema);
