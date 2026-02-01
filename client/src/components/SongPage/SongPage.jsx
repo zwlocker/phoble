@@ -37,7 +37,15 @@ const SongPage = () => {
     fetchSong();
   }, [id]);
 
-  if (!song) return null;
+  if (!song && !loading) {
+    return (
+      <Container maxWidth="lg" sx={{ mt: 10, textAlign: "center" }}>
+        <h2 className="text-2xl text-gray-300 font-medium">
+          Thank you for your support. Phoble is no longer in active development.
+        </h2>
+      </Container>
+    );
+  }
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
