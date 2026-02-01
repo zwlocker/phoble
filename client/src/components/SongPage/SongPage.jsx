@@ -37,7 +37,7 @@ const SongPage = () => {
     fetchSong();
   }, [id]);
 
-  if (!song && !loading) {
+  if (!song) {
     return (
       <Container maxWidth="lg" sx={{ mt: 10, textAlign: "center" }}>
         <h2 className="text-2xl text-gray-300 font-medium">
